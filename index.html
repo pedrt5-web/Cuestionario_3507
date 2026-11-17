@@ -1,0 +1,2204 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Guía de Estudio Interactiva — Norma Venezolana COVENIN 3507:1999</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+    body { font-family: 'Inter', sans-serif; }
+  </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col justify-between selection:bg-red-600 selection:text-white">
+
+  <!-- ==================== ENCABEZADO TÉCNICO INSTITUCIONAL ==================== -->
+  <header class="bg-slate-900 border-b border-slate-800 shadow-lg sticky top-0 z-40">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-3.5 text-center md:text-left">
+        <div class="p-2.5 bg-red-700/20 border border-red-500/30 rounded-xl text-red-500 shrink-0">
+          <svg class="w-8 h-8" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+          </svg>
+        </div>
+        <div>
+          <div class="flex items-center justify-center md:justify-start gap-2">
+            <span class="px-2 py-0.5 rounded text-[11px] font-extrabold uppercase bg-red-900/60 text-red-300 border border-red-700">Norma Venezolana</span>
+            <span class="text-xs font-bold text-amber-400">COVENIN 3507:1999</span>
+          </div>
+          <h1 class="text-lg sm:text-xl font-black text-white tracking-tight mt-0.5">
+            Guía de Estudio y Evaluación de Investigación de Incendios y Explosiones
+          </h1>
+        </div>
+      </div>
+
+      <!-- Navegación Superior -->
+      <nav class="flex items-center gap-2 self-start md:self-center">
+        <button id="nav-btn-home" onclick="switchView('home')" class="px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold bg-slate-800 hover:bg-slate-700 text-white border border-slate-700 transition flex items-center gap-1.5">
+          <svg class="w-4 h-4 text-amber-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+          </svg>
+          <span>Evaluación</span>
+        </button>
+        <button id="nav-btn-history" onclick="switchView('history')" class="px-3.5 py-2 rounded-lg text-xs sm:text-sm font-semibold bg-amber-600 hover:bg-amber-500 text-white shadow transition flex items-center gap-1.5">
+          <svg id="nav-history-lock-icon" class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+          </svg>
+          <span>Acceso Docente / Calificaciones</span>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Notificación / Toast de Estado -->
+  <div id="toast-container" class="fixed bottom-5 right-5 z-50 transition-all duration-300 transform translate-y-20 opacity-0 pointer-events-none">
+    <div id="toast-content" class="px-5 py-3 rounded-xl shadow-2xl border font-semibold text-sm flex items-center gap-3">
+      <span id="toast-icon"></span>
+      <span id="toast-msg"></span>
+    </div>
+  </div>
+
+  <!-- ==================== CONTENIDO PRINCIPAL ==================== -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 py-8 w-full flex-grow">
+
+    <!-- ==================== VISTA 1: INICIO Y DATOS DEL PARTICIPANTE ==================== -->
+    <section id="view-home" class="max-w-3xl mx-auto space-y-6">
+      <div class="bg-slate-900 border border-slate-800 rounded-2xl shadow-xl overflow-hidden">
+        <div class="bg-gradient-to-r from-red-950 via-slate-900 to-slate-900 p-6 sm:p-8 border-b border-slate-800">
+          <span class="text-xs font-bold uppercase tracking-wider text-red-400">Evaluación Técnica de Competencias</span>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-white mt-1">Simulador de Examen y Guía de Estudio</h2>
+          <p class="text-slate-300 text-sm mt-2 leading-relaxed">
+            Basado en la <strong>Norma Venezolana COVENIN 3507:1999</strong>. Ingrese sus datos personales para iniciar la prueba interactiva compuesta por 25 preguntas aleatorias seleccionadas de un banco técnico de 65 reactivos normativos.
+          </p>
+        </div>
+
+        <form id="start-form" class="p-6 sm:p-8 space-y-5">
+          <div>
+            <label for="participant-name" class="block text-sm font-semibold text-slate-200 mb-1.5">
+              Nombre y Apellido Completo <span class="text-red-500">*</span>
+            </label>
+            <input type="text" id="participant-name" required placeholder="Ej. Lcdo. Carlos Mendoza"
+              class="w-full px-4 py-3 rounded-xl border border-slate-700 bg-slate-800/80 text-white placeholder-slate-400 focus:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-red-600 font-medium transition" />
+            <p id="error-name" class="hidden text-xs text-red-400 font-semibold mt-1.5">Por favor, ingrese su nombre y apellido.</p>
+          </div>
+
+          <div>
+            <label for="participant-id" class="block text-sm font-semibold text-slate-200 mb-1.5">
+              Número de Cédula de Identidad <span class="text-red-500">*</span>
+            </label>
+            <input type="text" id="participant-id" required placeholder="Ej. V-18.456.789 o 18456789"
+              class="w-full px-4 py-3 rounded-xl border border-slate-700 bg-slate-800/80 text-white placeholder-slate-400 focus:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-red-600 font-medium transition" />
+            <p id="error-id" class="hidden text-xs text-red-400 font-semibold mt-1.5">Por favor, ingrese su número de cédula de identidad.</p>
+          </div>
+
+          <div>
+            <label for="participant-cohort" class="block text-sm font-semibold text-slate-200 mb-1.5">
+              Sección / Cohorte / Grupo <span class="text-slate-400 font-normal">(Opcional)</span>
+            </label>
+            <input type="text" id="participant-cohort" placeholder="Ej. Sección A / Cohorte 2026-II / Brigada Norte"
+              class="w-full px-4 py-3 rounded-xl border border-slate-700 bg-slate-800/80 text-white placeholder-slate-400 focus:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-red-600 focus:border-red-600 font-medium transition" />
+          </div>
+
+          <div class="bg-slate-800/60 border border-slate-700/80 rounded-xl p-4 text-xs sm:text-sm text-slate-300 space-y-1.5">
+            <h4 class="font-bold text-white uppercase tracking-wide text-xs text-amber-400 mb-1">Instrucciones de la Evaluación:</h4>
+            <ul class="list-disc list-inside space-y-1">
+              <li><strong>Estructura:</strong> 25 preguntas de opción múltiple seleccionadas aleatoriamente.</li>
+              <li><strong>Escala de evaluación:</strong> 0,00 a 20,00 puntos (cada acierto equivale a <strong>0,80 puntos</strong>). Nota mínima aprobatoria sugerida: <strong>12,00 pts</strong>.</li>
+              <li><strong>Registro automático:</strong> Al finalizar, podrá revisar su calificación individual y su acta quedará resguardada en el registro exclusivo del docente.</li>
+            </ul>
+          </div>
+
+          <button type="submit" class="w-full py-3.5 px-6 bg-red-700 hover:bg-red-600 active:bg-red-800 text-white font-bold rounded-xl shadow-lg hover:shadow-red-900/30 transition flex items-center justify-center gap-2 text-base">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+            </svg>
+            <span>Comenzar Evaluación COVENIN 3507:1999</span>
+          </button>
+        </form>
+      </div>
+    </section>
+
+    <!-- ==================== VISTA 2: DESARROLLO DEL CUESTIONARIO ==================== -->
+    <section id="view-quiz" class="hidden max-w-4xl mx-auto space-y-6">
+      
+      <!-- Cabecera del Cuestionario -->
+      <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 sm:p-6 shadow-md flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div>
+          <span class="text-xs font-bold uppercase tracking-wider text-amber-400" id="quiz-chapter-tag">—</span>
+          <h3 class="text-lg font-bold text-white mt-0.5" id="quiz-display-name">—</h3>
+          <p class="text-xs text-slate-400" id="quiz-display-id">—</p>
+        </div>
+        <div class="flex items-center gap-4">
+          <div class="bg-slate-800 border border-slate-700 px-4 py-2 rounded-xl text-center">
+            <span class="text-[10px] font-bold text-slate-400 uppercase block">Tiempo</span>
+            <span id="quiz-timer" class="font-mono text-base font-extrabold text-amber-400">00:00</span>
+          </div>
+          <div class="bg-slate-800 border border-slate-700 px-4 py-2 rounded-xl text-center">
+            <span class="text-[10px] font-bold text-slate-400 uppercase block">Progreso</span>
+            <span id="quiz-progress-text" class="font-mono text-base font-extrabold text-white">1 / 25</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cuadrícula de Navegación Rápida -->
+      <div class="bg-slate-900 border border-slate-800 rounded-2xl p-4 shadow-sm">
+        <span class="text-xs font-bold uppercase tracking-wider text-slate-400 block mb-2.5">Navegación de Preguntas (25 reactivos):</span>
+        <div id="question-nav-grid" class="flex flex-wrap gap-1.5"></div>
+      </div>
+
+      <!-- Tarjeta de Pregunta Actual -->
+      <div class="bg-slate-900 border border-slate-800 rounded-2xl shadow-xl overflow-hidden">
+        <div class="p-6 sm:p-8 space-y-6">
+          <div class="flex items-start justify-between gap-4">
+            <h4 class="text-base sm:text-lg font-bold text-white leading-relaxed" id="question-text">
+              <!-- Texto de la pregunta -->
+            </h4>
+            <span id="question-number-badge" class="px-3 py-1 bg-slate-800 border border-slate-700 rounded-lg text-xs font-mono font-bold text-amber-400 shrink-0">
+              Pregunta 1/25
+            </span>
+          </div>
+
+          <div id="options-container" class="space-y-3">
+            <!-- Opciones generadas por JS -->
+          </div>
+        </div>
+
+        <div class="bg-slate-950 px-6 py-4 border-t border-slate-800 flex items-center justify-between">
+          <button type="button" id="btn-prev" onclick="prevQuestion()" class="px-4 py-2.5 rounded-xl border border-slate-700 bg-slate-800 hover:bg-slate-700 text-white font-semibold text-sm transition flex items-center gap-1.5">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+            </svg>
+            <span>Anterior</span>
+          </button>
+
+          <button type="button" id="btn-next" onclick="nextQuestion()" class="px-5 py-2.5 rounded-xl bg-red-700 hover:bg-red-600 text-white font-bold text-sm shadow transition flex items-center gap-1.5">
+            <span>Siguiente</span>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+            </svg>
+          </button>
+
+          <button type="button" id="btn-submit-quiz" onclick="confirmSubmitQuiz()" class="hidden px-6 py-2.5 rounded-xl bg-emerald-700 hover:bg-emerald-600 text-white font-bold text-sm shadow transition flex items-center gap-1.5">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+            </svg>
+            <span>Finalizar y Entregar Examen</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== VISTA 3: RESULTADOS INDIVIDUALES ==================== -->
+    <section id="view-results" class="hidden max-w-4xl mx-auto space-y-6">
+      <div class="bg-slate-900 border border-slate-800 rounded-2xl shadow-xl overflow-hidden">
+        <div class="bg-slate-950 px-6 py-5 border-b border-slate-800 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div>
+            <span class="text-xs font-bold uppercase tracking-wider text-amber-400">Acta de Resultado Individual — COVENIN 3507:1999</span>
+            <h2 class="text-xl sm:text-2xl font-extrabold text-white mt-0.5" id="res-name">—</h2>
+            <p class="text-sm text-slate-400">
+              Cédula: <strong id="res-id" class="text-white">—</strong>
+              <span id="res-cohort-wrapper" class="hidden"> • Sección: <strong id="res-cohort" class="text-amber-300">—</strong></span>
+              • Fecha: <span id="res-date">—</span>
+            </p>
+          </div>
+          <div id="res-status-badge" class="px-4 py-2 rounded-xl font-extrabold text-sm uppercase tracking-wide self-start sm:self-center">
+            —
+          </div>
+        </div>
+
+        <div class="p-6 grid grid-cols-2 lg:grid-cols-4 gap-4">
+          <div class="bg-slate-800/80 border border-slate-700 rounded-xl p-4 text-center">
+            <span class="text-xs font-semibold text-slate-400 block mb-1">Calificación Final</span>
+            <span id="res-score" class="text-2xl sm:text-3xl font-black text-amber-400">0,00</span>
+            <span class="text-xs text-slate-400 block mt-0.5">Escala 0 a 20 pts</span>
+          </div>
+
+          <div class="bg-slate-800/80 border border-slate-700 rounded-xl p-4 text-center">
+            <span class="text-xs font-semibold text-slate-400 block mb-1">Aciertos Obtenidos</span>
+            <span id="res-correct" class="text-2xl sm:text-3xl font-black text-white">0 / 25</span>
+            <span class="text-xs text-slate-400 block mt-0.5">(0,80 pts c/u)</span>
+          </div>
+
+          <div class="bg-slate-800/80 border border-slate-700 rounded-xl p-4 text-center">
+            <span class="text-xs font-semibold text-slate-400 block mb-1">Porcentaje de Éxito</span>
+            <span id="res-percent" class="text-2xl sm:text-3xl font-black text-white">0%</span>
+            <span class="text-xs text-slate-400 block mt-0.5">Rendimiento</span>
+          </div>
+
+          <div class="bg-slate-800/80 border border-slate-700 rounded-xl p-4 text-center">
+            <span class="text-xs font-semibold text-slate-400 block mb-1">Tiempo Empleado</span>
+            <span id="res-time" class="text-xl sm:text-2xl font-black text-white font-mono">00:00</span>
+            <span class="text-xs text-slate-400 block mt-0.5">Duración total</span>
+          </div>
+        </div>
+
+        <div class="px-6 py-4 bg-slate-950 border-t border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div id="res-sync-status" class="text-xs font-semibold text-emerald-400 flex items-center gap-1.5">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <span>Calificación registrada satisfactoriamente en el acta del docente.</span>
+          </div>
+
+          <div class="flex flex-wrap gap-2.5">
+            <button onclick="switchView('home')" class="px-4 py-2.5 rounded-xl border border-slate-700 bg-slate-800 hover:bg-slate-700 text-white font-semibold text-sm transition">
+              Volver al Inicio
+            </button>
+            <button onclick="startNewAttemptSameUser()" class="px-4 py-2.5 rounded-xl bg-red-700 hover:bg-red-600 text-white font-semibold text-sm transition">
+              Nuevo Intento Aleatorio
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Revisión Detallada de las 25 Preguntas -->
+      <div class="bg-slate-900 border border-slate-800 rounded-2xl shadow-xl p-6 sm:p-8 space-y-6">
+        <h3 class="text-lg font-extrabold text-white border-b border-slate-800 pb-3">Revisión Normativa y Explicación de Reactivos</h3>
+        <div id="results-details-list" class="space-y-4">
+          <!-- Detalles generados por JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== VISTA 4: HISTORIAL / REGISTRO DE CALIFICACIONES (PROTEGIDO) ==================== -->
+    <section id="view-history" class="hidden space-y-5">
+
+      <!-- SUB-VISTA 4A: PANTALLA DE ACCESO RESTRINGIDO -->
+      <div id="teacher-gate-panel" class="max-w-md mx-auto bg-slate-900 rounded-2xl shadow-xl border border-slate-800 overflow-hidden my-4">
+        <div class="bg-slate-950 px-6 py-5 text-white border-b-4 border-amber-500 flex items-center gap-3.5">
+          <div class="p-3 bg-amber-500/15 border border-amber-400/30 rounded-xl text-amber-400 shrink-0">
+            <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+            </svg>
+          </div>
+          <div>
+            <span class="text-[11px] font-bold uppercase tracking-wider text-amber-400">Área Protegida</span>
+            <h2 class="text-lg font-extrabold leading-tight">Acceso Restringido — Solo Docente</h2>
+            <p class="text-xs text-slate-300 mt-0.5">Autenticación requerida para consultar y administrar calificaciones</p>
+          </div>
+        </div>
+
+        <form id="teacher-login-form" class="p-6 space-y-4" novalidate>
+          <div>
+            <label for="teacher-password-input" class="block text-sm font-semibold text-slate-200 mb-1.5">
+              Clave de Acceso Docente
+            </label>
+            <div class="relative">
+              <input type="password" id="teacher-password-input" autocomplete="current-password" placeholder="Ingrese la clave del profesor"
+                class="w-full pl-4 pr-11 py-3 rounded-xl border border-slate-700 bg-slate-800 text-white placeholder-slate-400 focus:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-slate-600 font-medium transition" />
+              <button type="button" onclick="togglePasswordVisibility('teacher-password-input', 'eye-icon-login')" title="Mostrar / ocultar clave"
+                class="absolute right-3 top-3 text-slate-400 hover:text-white p-0.5">
+                <svg id="eye-icon-login" class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                </svg>
+              </button>
+            </div>
+            <p id="teacher-login-error" class="hidden text-xs text-red-400 font-semibold mt-1.5">
+              Clave incorrecta. Verifique sus credenciales de docente e intente nuevamente.
+            </p>
+          </div>
+
+          <div class="bg-slate-800/80 border border-slate-700 rounded-xl p-3 text-xs text-slate-300 flex items-start gap-2">
+            <svg class="w-4 h-4 text-amber-400 shrink-0 mt-0.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <div>
+              <span>Los participantes solo tienen acceso a su resultado individual al culminar la prueba.</span>
+              <details class="mt-1.5">
+                <summary class="cursor-pointer font-semibold text-amber-300 hover:text-amber-200 select-none">
+                  Nota de configuración inicial
+                </summary>
+                <p class="mt-1 text-[11px] text-slate-300">
+                  La clave maestra predeterminada de instalación es: <code class="px-1.5 py-0.5 bg-slate-900 rounded font-mono font-bold text-white">COVENIN3507</code>. Puede modificarla inmediatamente tras ingresar.
+                </p>
+              </details>
+            </div>
+          </div>
+
+          <div class="flex items-center gap-2.5 pt-1">
+            <button type="button" onclick="switchView('home')" class="w-1/3 py-3 px-4 rounded-xl border border-slate-700 bg-slate-800 hover:bg-slate-700 text-slate-200 font-semibold text-sm transition">
+              Cancelar
+            </button>
+            <button type="submit" class="w-2/3 py-3 px-4 rounded-xl bg-amber-600 hover:bg-amber-500 text-white font-bold text-sm shadow transition flex items-center justify-center gap-2">
+              <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M8 11V7a4 4 0 118 0m-4 8v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z" />
+              </svg>
+              <span>Desbloquear Panel</span>
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <!-- SUB-VISTA 4B: PANEL ADMINISTRATIVO DEL DOCENTE (DESBLOQUEADO) -->
+      <div id="teacher-dashboard-panel" class="hidden space-y-5">
+        
+        <!-- Barra Superior de Sesión Docente Activa -->
+        <div class="bg-slate-900 text-white rounded-2xl px-5 py-3.5 shadow-md border border-slate-800 flex flex-wrap items-center justify-between gap-3">
+          <div class="flex items-center gap-2.5">
+            <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
+            <span class="text-xs sm:text-sm font-bold text-emerald-300">Sesión Docente Activa</span>
+            <span class="hidden sm:inline text-slate-700">|</span>
+            <span class="text-xs text-slate-300">Administración de Acta de Calificaciones (COVENIN 3507:1999)</span>
+          </div>
+
+          <div class="flex flex-wrap items-center gap-2">
+            <button onclick="toggleChangePasswordModal(true)" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 border border-slate-700 text-xs font-semibold text-amber-300 transition flex items-center gap-1.5">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z" />
+              </svg>
+              <span>Cambiar Clave Docente</span>
+            </button>
+
+            <button onclick="lockTeacherSession(true)" class="px-3 py-1.5 rounded-lg bg-red-700 hover:bg-red-600 text-xs font-bold text-white transition flex items-center gap-1.5">
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+              </svg>
+              <span>Cerrar Sesión Docente</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="bg-slate-900 rounded-2xl shadow-xl border border-slate-800 p-5 sm:p-6 space-y-5">
+          <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 border-b border-slate-800 pb-4">
+            <div>
+              <h2 class="text-xl font-extrabold text-white">Registro General de Calificaciones e Historial</h2>
+              <p class="text-xs sm:text-sm text-slate-400 mt-0.5">
+                Control exclusivo del profesor — Norma Venezolana COVENIN 3507:1999 (Nota aprobatoria mínima: <strong id="passing-grade-label" class="text-amber-400">12,00</strong> / 20,00 pts).
+              </p>
+            </div>
+
+            <div class="flex flex-wrap items-center gap-2.5">
+              <div class="flex items-center gap-1.5 bg-slate-800 border border-slate-700 rounded-xl px-3 py-2 text-xs">
+                <label for="passing-threshold" class="font-semibold text-slate-300">Nota mínima:</label>
+                <select id="passing-threshold" onchange="renderHistoryTable()" class="bg-transparent font-bold text-white focus:outline-none">
+                  <option value="10" class="bg-slate-900">10,00 pts</option>
+                  <option value="12" selected class="bg-slate-900">12,00 pts</option>
+                  <option value="14" class="bg-slate-900">14,00 pts</option>
+                  <option value="15" class="bg-slate-900">15,00 pts</option>
+                </select>
+              </div>
+
+              <button onclick="exportHistoryToCSV()" class="px-4 py-2.5 rounded-xl bg-emerald-700 hover:bg-emerald-600 text-white font-bold text-xs sm:text-sm shadow transition flex items-center gap-1.5">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                </svg>
+                <span>Exportar CSV / Excel</span>
+              </button>
+
+              <button onclick="openClearAllModal()" class="px-4 py-2.5 rounded-xl bg-red-950/80 hover:bg-red-900 text-red-300 border border-red-700 font-bold text-xs sm:text-sm transition flex items-center gap-1.5">
+                <svg class="w-4 h-4 text-red-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                </svg>
+                <span>Limpiar Todo el Registro</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Controles de Búsqueda y Filtro -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+            <div class="sm:col-span-2">
+              <div class="relative">
+                <input type="text" id="history-search" oninput="renderHistoryTable()" placeholder="Buscar por Nombre, Cédula o Sección/Cohorte..."
+                  class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-slate-700 bg-slate-800 text-white placeholder-slate-400 text-sm focus:outline-none focus:ring-2 focus:ring-slate-600" />
+                <svg class="w-4 h-4 text-slate-400 absolute left-3.5 top-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+              </div>
+            </div>
+
+            <div>
+              <select id="history-filter-status" onchange="renderHistoryTable()" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-700 bg-slate-800 text-sm font-medium text-white focus:outline-none">
+                <option value="all" class="bg-slate-900">Todos los estados</option>
+                <option value="approved" class="bg-slate-900">Solo Aprobados</option>
+                <option value="failed" class="bg-slate-900">Solo Reprobados</option>
+              </select>
+            </div>
+
+            <div>
+              <select id="history-sort" onchange="renderHistoryTable()" class="w-full px-3.5 py-2.5 rounded-xl border border-slate-700 bg-slate-800 text-sm font-medium text-white focus:outline-none">
+                <option value="date-desc" class="bg-slate-900">Más recientes primero</option>
+                <option value="date-asc" class="bg-slate-900">Más antiguos primero</option>
+                <option value="score-desc" class="bg-slate-900">Mayor calificación</option>
+                <option value="score-asc" class="bg-slate-900">Menor calificación</option>
+                <option value="name-asc" class="bg-slate-900">Nombre (A - Z)</option>
+              </select>
+            </div>
+          </div>
+
+          <!-- Estadísticas del Grupo -->
+          <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3 text-xs">
+            <div class="bg-slate-800/80 border border-slate-700 rounded-xl p-3">
+              <span class="text-slate-400 font-semibold block">Evaluados</span>
+              <span id="stat-total" class="text-lg font-extrabold text-white">0</span>
+            </div>
+            <div class="bg-emerald-950/60 border border-emerald-800/80 rounded-xl p-3">
+              <span class="text-emerald-400 font-semibold block">Aprobados</span>
+              <span id="stat-approved" class="text-lg font-extrabold text-emerald-300">0</span>
+            </div>
+            <div class="bg-red-950/60 border border-red-800/80 rounded-xl p-3">
+              <span class="text-red-400 font-semibold block">Reprobados</span>
+              <span id="stat-failed" class="text-lg font-extrabold text-red-300">0</span>
+            </div>
+            <div class="bg-amber-950/60 border border-amber-800/80 rounded-xl p-3">
+              <span class="text-amber-400 font-semibold block">Promedio Grupo</span>
+              <span id="stat-avg" class="text-lg font-extrabold text-amber-300">0,00 pts</span>
+            </div>
+            <div class="bg-blue-950/60 border border-blue-800/80 rounded-xl p-3">
+              <span class="text-blue-400 font-semibold block">Nota Máxima</span>
+              <span id="stat-max" class="text-lg font-extrabold text-blue-300">0,00 pts</span>
+            </div>
+            <div class="bg-slate-800 border border-slate-700 rounded-xl p-3">
+              <span class="text-slate-300 font-semibold block">Nota Mínima</span>
+              <span id="stat-min" class="text-lg font-extrabold text-slate-100">0,00 pts</span>
+            </div>
+          </div>
+
+          <!-- Tabla Responsiva -->
+          <div class="overflow-x-auto border border-slate-800 rounded-xl">
+            <table class="w-full text-left border-collapse text-sm">
+              <thead>
+                <tr class="bg-slate-950 text-slate-300 text-xs uppercase tracking-wider">
+                  <th class="py-3 px-4 font-bold">Participante</th>
+                  <th class="py-3 px-4 font-bold">Cédula</th>
+                  <th class="py-3 px-4 font-bold">Sección / Cohorte</th>
+                  <th class="py-3 px-4 font-bold">Fecha y Hora</th>
+                  <th class="py-3 px-4 font-bold text-center">Aciertos</th>
+                  <th class="py-3 px-4 font-bold text-center">Nota (/20)</th>
+                  <th class="py-3 px-4 font-bold text-center">Tiempo</th>
+                  <th class="py-3 px-4 font-bold text-center">Estado</th>
+                  <th class="py-3 px-4 font-bold text-center">Acciones</th>
+                </tr>
+              </thead>
+              <tbody id="history-tbody" class="divide-y divide-slate-800 bg-slate-900">
+                <tr>
+                  <td colspan="9" class="py-8 text-center text-slate-400">Cargando registros de evaluaciones...</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- MODAL 1: DETALLE DEL INTENTO -->
+      <div id="attempt-detail-modal" class="hidden fixed inset-0 bg-slate-950/80 backdrop-blur-xs z-50 flex items-center justify-center p-4">
+        <div class="bg-slate-900 rounded-2xl max-w-3xl w-full max-h-[88vh] flex flex-col shadow-2xl border border-slate-800 overflow-hidden">
+          <div class="bg-slate-950 text-white px-6 py-4 flex items-center justify-between border-b border-slate-800">
+            <div>
+              <span class="text-[11px] font-bold uppercase tracking-wider text-amber-400">Auditoría Individual del Intento</span>
+              <h3 id="modal-detail-title" class="text-base sm:text-lg font-extrabold">—</h3>
+            </div>
+            <button onclick="closeAttemptDetailModal()" class="p-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
+          <div id="modal-detail-body" class="p-5 overflow-y-auto space-y-3 text-xs sm:text-sm text-slate-200"></div>
+          <div class="px-6 py-3.5 bg-slate-950 border-t border-slate-800 flex justify-end">
+            <button onclick="closeAttemptDetailModal()" class="px-4 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-semibold text-xs sm:text-sm">
+              Cerrar Detalle
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- MODAL 2: CAMBIAR CLAVE DOCENTE -->
+      <div id="change-password-modal" class="hidden fixed inset-0 bg-slate-950/80 backdrop-blur-xs z-50 flex items-center justify-center p-4">
+        <div class="bg-slate-900 rounded-2xl max-w-md w-full p-6 shadow-2xl border border-slate-800 space-y-4">
+          <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+            <h4 class="text-lg font-extrabold text-white">Actualizar Clave Docente</h4>
+            <button onclick="toggleChangePasswordModal(false)" class="text-slate-400 hover:text-white">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
+
+          <form id="change-password-form" class="space-y-3.5" novalidate>
+            <div>
+              <label for="current-teacher-pass" class="block text-xs font-bold text-slate-300 mb-1">Clave Docente Actual</label>
+              <input type="password" id="current-teacher-pass" required class="w-full px-3.5 py-2.5 rounded-xl border border-slate-700 bg-slate-800 text-white focus:outline-none focus:ring-2 focus:ring-slate-600 text-sm" />
+            </div>
+            <div>
+              <label for="new-teacher-pass" class="block text-xs font-bold text-slate-300 mb-1">Nueva Clave Docente (mín. 4 caracteres)</label>
+              <input type="password" id="new-teacher-pass" required class="w-full px-3.5 py-2.5 rounded-xl border border-slate-700 bg-slate-800 text-white focus:outline-none focus:ring-2 focus:ring-slate-600 text-sm" />
+            </div>
+            <div>
+              <label for="confirm-teacher-pass" class="block text-xs font-bold text-slate-300 mb-1">Confirmar Nueva Clave Docente</label>
+              <input type="password" id="confirm-teacher-pass" required class="w-full px-3.5 py-2.5 rounded-xl border border-slate-700 bg-slate-800 text-white focus:outline-none focus:ring-2 focus:ring-slate-600 text-sm" />
+            </div>
+            <p id="change-pass-error" class="hidden text-xs text-red-400 font-semibold"></p>
+
+            <div class="flex justify-end gap-2 pt-2">
+              <button type="button" onclick="toggleChangePasswordModal(false)" class="px-4 py-2 rounded-xl border border-slate-700 text-slate-300 font-semibold text-xs sm:text-sm hover:bg-slate-800">
+                Cancelar
+              </button>
+              <button type="submit" class="px-4 py-2 rounded-xl bg-amber-600 hover:bg-amber-500 text-white font-bold text-xs sm:text-sm shadow">
+                Guardar Nueva Clave
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- MODAL 3: CONFIRMACIÓN ELIMINACIÓN INDIVIDUAL -->
+      <div id="delete-single-modal" class="hidden fixed inset-0 bg-slate-950/80 backdrop-blur-xs z-50 flex items-center justify-center p-4">
+        <div class="bg-slate-900 rounded-2xl max-w-md w-full p-6 shadow-2xl border border-slate-800 space-y-4">
+          <div class="flex items-center gap-3 text-red-400">
+            <div class="p-2.5 bg-red-950 border border-red-800 rounded-xl">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+              </svg>
+            </div>
+            <h4 class="text-lg font-extrabold text-white">Eliminar Registro Individual</h4>
+          </div>
+          <p id="delete-single-text" class="text-sm text-slate-300 leading-relaxed">
+            ¿Confirma que desea eliminar permanentemente este intento del registro?
+          </p>
+          <div class="flex justify-end gap-2 pt-2">
+            <button onclick="closeDeleteSingleModal()" class="px-4 py-2 rounded-xl border border-slate-700 text-slate-300 font-semibold text-sm hover:bg-slate-800">
+              Cancelar
+            </button>
+            <button onclick="confirmDeleteSingleRecord()" class="px-4 py-2 rounded-xl bg-red-700 hover:bg-red-600 text-white font-bold text-sm shadow">
+              Eliminar Registro
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- MODAL 4: DOBLE CONFIRMACIÓN LIMPIAR TODO -->
+      <div id="clear-all-modal" class="hidden fixed inset-0 bg-slate-950/85 backdrop-blur-xs z-50 flex items-center justify-center p-4">
+        <div class="bg-slate-900 rounded-2xl max-w-md w-full p-6 shadow-2xl border-2 border-red-700 space-y-4">
+          <div class="flex items-center gap-3 text-red-400">
+            <div class="p-2.5 bg-red-950 border border-red-800 rounded-xl">
+              <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+              </svg>
+            </div>
+            <div>
+              <h4 class="text-lg font-extrabold text-white">Limpiar Todo el Registro</h4>
+              <p class="text-xs font-semibold text-red-400">Acción irreversible — Nueva Cohorte / Reutilización</p>
+            </div>
+          </div>
+
+          <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+            Esta operación eliminará <strong>todos los registros de calificaciones almacenados</strong> en este navegador. Se recomienda exportar previamente el archivo CSV si desea conservar respaldo.
+          </p>
+
+          <div>
+            <label for="clear-confirm-word" class="block text-xs font-bold text-slate-200 mb-1.5">
+              Para confirmar, escriba la palabra <span class="px-1.5 py-0.5 bg-red-950 text-red-300 rounded font-mono border border-red-800">LIMPIAR</span> en el recuadro:
+            </label>
+            <input type="text" id="clear-confirm-word" autocomplete="off" placeholder="Escriba LIMPIAR"
+              class="w-full px-3.5 py-2.5 rounded-xl border border-slate-700 bg-slate-800 text-white focus:outline-none focus:ring-2 focus:ring-red-600 text-sm font-mono uppercase placeholder-slate-500" />
+            <p id="clear-confirm-error" class="hidden text-xs text-red-400 font-semibold mt-1">
+              Debe escribir exactamente la palabra LIMPIAR para habilitar la purga del registro.
+            </p>
+          </div>
+
+          <div class="flex justify-end gap-2 pt-2">
+            <button onclick="closeClearAllModal()" class="px-4 py-2 rounded-xl border border-slate-700 text-slate-300 font-semibold text-sm hover:bg-slate-800">
+              Cancelar
+            </button>
+            <button id="btn-execute-clear-all" onclick="executeClearAllRecords()" class="px-4 py-2 rounded-xl bg-red-700 hover:bg-red-600 text-white font-bold text-sm shadow">
+              Purgar Todo el Registro
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- ==================== PIE DE PÁGINA INSTITUCIONAL ==================== -->
+  <footer class="bg-slate-900 border-t border-slate-800 py-6 mt-12 text-center text-xs text-slate-400">
+    <div class="max-w-7xl mx-auto px-4 space-y-1">
+      <p class="font-bold text-slate-300">Norma Venezolana COVENIN 3507:1999 — Guía para la Investigación de Incendios y Explosiones</p>
+      <p>Sistema interactivo de capacitación técnica, autoevaluación forense y registro docente.</p>
+    </div>
+  </footer>
+
+  <!-- ==================== SCRIPT PRINCIPAL AUTOCONTENIDO ==================== -->
+  <script>
+    // ==================== ALMACENAMIENTO Y HASH LOCAL SEGURO (COMPATIBLE file:///) ====================
+    const LOCAL_STORAGE_KEY = 'covenin_3507_1999_evaluations_v2';
+    const LOCAL_TEACHER_PASS_KEY = 'covenin_3507_1999_teacher_pwd_v2';
+    const DEFAULT_MASTER_PASS = 'COVENIN3507';
+
+    let isTeacherAuthenticated = false;
+    let pendingDeleteRecord = null;
+
+    // Función Hash plana robusta compatible con file:/// sin requerir crypto.subtle ni HTTPS
+    function simpleHash(str) {
+      let hash = 0;
+      if (str.length === 0) return hash.toString();
+      for (let i = 0; i < str.length; i++) {
+        const char = str.charCodeAt(i);
+        hash = (hash << 5) - hash + char;
+        hash |= 0; // Convert to 32bit integer
+      }
+      return 'h_' + Math.abs(hash).toString(36) + '_' + str.length;
+    }
+
+    function getActiveTeacherPassword() {
+      const stored = localStorage.getItem(LOCAL_TEACHER_PASS_KEY);
+      if (stored) return stored;
+      return DEFAULT_MASTER_PASS;
+    }
+
+    function getAllRecords() {
+      try {
+        const data = localStorage.getItem(LOCAL_STORAGE_KEY);
+        return data ? JSON.parse(data) : [];
+      } catch (e) {
+        return [];
+      }
+    }
+
+    function saveRecordLocally(record) {
+      try {
+        const records = getAllRecords();
+        records.unshift(record);
+        localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(records));
+      } catch (e) {
+        console.error('Error guardando en localStorage:', e);
+      }
+    }
+
+    // ==================== BANCO DE 65 PREGUNTAS TÉCNICAS (COVENIN 3507:1999) ====================
+    const QUESTION_BANK = [
+      {
+        id: 1,
+        chapter: "Cap. 1 a 3 — Objeto, Campo de Aplicación y Referencias",
+        question: "¿Cuál es el propósito principal de la Norma Venezolana COVENIN 3507:1999?",
+        options: [
+          "Establecer pautas uniformes para la investigación científica de incendios y explosiones",
+          "Regular exclusivamente la fabricación de extintores portátiles en el país",
+          "Fijar tarifas de primas de seguros contra siniestros industriales",
+          "Establecer los sueldos del personal de cuerpos de bomberos municipales"
+        ],
+        explanation: "La norma COVENIN 3507:1999 establece guías sistemáticas y uniformes para determinar el origen, causa y circunstancias de incendios y explosiones."
+      },
+      {
+        id: 2,
+        chapter: "Cap. 4 — Metodología Básica",
+        question: "Según la metodología básica de la investigación de incendios, ¿cuál es el primer paso fundamental?",
+        options: [
+          "Determinar el origen del fuego y luego investigar la causa",
+          "Entrevistar inmediatamente a los testigos presenciales sin inspeccionar el sitio",
+          "Establecer responsabilidades penales y mercantiles",
+          "Redactar el informe pericial definitivo antes de remover escombros"
+        ],
+        explanation: "El principio metodológico fundamental exige determinar primero dónde se originó el fuego (origen) antes de determinar por qué se inició (causa)."
+      },
+      {
+        id: 3,
+        chapter: "Cap. 4 — Metodología Básica",
+        question: "¿Qué enfoque científico recomienda la norma COVENIN 3507 para el análisis de evidencias?",
+        options: [
+          "El método científico (recolección de datos, formulación y comprobación de hipótesis)",
+          "La intuición experimentada del investigador sin registro documental",
+          "La presunción inmediata de origen eléctrico en todas las estructuras",
+          "La suposición basada exclusivamente en estadísticas de siniestros previos"
+        ],
+        explanation: "La norma se fundamenta en el uso riguroso del método científico para evitar sesgos y conjeturas infundadas."
+      },
+      {
+        id: 4,
+        chapter: "Cap. 5 — Ciencia del Fuego",
+        question: "¿Qué representa el tetraedro del fuego en la investigación técnica?",
+        options: [
+          "Combustible, comburente, energía de activación y reacción en cadena",
+          "Solo calor, oxígeno y material inflamable",
+          "Presión, temperatura, volumen y densidad del gas",
+          "Vapor, líquido, sólido y plasma"
+        ],
+        explanation: "El tetraedro añade la reacción química en cadena a los tres elementos tradicionales del triángulo del fuego (combustible, comburente y calor)."
+      },
+      {
+        id: 5,
+        chapter: "Cap. 5 — Ciencia del Fuego",
+        question: "En la dinámica del fuego, ¿cómo se define el fenómeno conocido como 'Flashover' (ígneo generalizado)?",
+        options: [
+          "La transición rápida donde todas las superficies combustibles alcanzan su temperatura de ignición simultáneamente",
+          "Una explosión violenta de gases de petróleo licuado (GLP)",
+          "La chispa generada por un cortocircuito en líneas vivas",
+          "El colapso estructural de columnas de concreto armado por fatiga térmica"
+        ],
+        explanation: "El flashover ocurre cuando el calor radiante en un recinto cerrado eleva los combustibles a su punto de ignición, incendiando toda la habitación a la vez."
+      },
+      {
+        id: 6,
+        chapter: "Cap. 5 — Ciencia del Fuego",
+        question: "¿Qué es el 'Backdraft' (fogonazo por retroceso)?",
+        options: [
+          "Una deflagración súbita provocada por la entrada repentina de oxígeno en un recinto con fuego confinado y deficiente de aire",
+          "El flujo laminar de gases calientes hacia el sistema de ventilación",
+          "La propagación de llamas a través de ductos eléctricos verticales",
+          "El enfriamiento brusco de vapores inflamables al aplicar agua a presión"
+        ],
+        explanation: "El backdraft se produce al abrir un vano en un incendio confinado rico en gases no quemados, provocando la mezcla explosiva con el oxígeno entrante."
+      },
+      {
+        id: 7,
+        chapter: "Cap. 6 — Marcas de Fuego",
+        question: "¿Qué indican comúnmente las líneas de humo u hollín en paredes y techos durante la inspección?",
+        options: [
+          "La trayectoria del flujo de gases calientes y humo desde la zona de origen",
+          "La ubicación exacta de interruptores eléctricos defectuosos",
+          "Las zonas donde se aplicó líquido acelerante con base de petróleo",
+          "El punto de máxima presión hidrostática de las tuberías de agua"
+        ],
+        explanation: "Las marcas de humo y hollín trazan el movimiento natural de los productos de la combustión ascendentes y laterales."
+      },
+      {
+        id: 8,
+        chapter: "Cap. 6 — Marcas de Fuego",
+        question: "¿Qué describe el patrón en forma de 'V' observado en paredes expuestas al fuego?",
+        options: [
+          "Que el foco de origen o punto de calor bajo estuvo ubicado en la base inferior de la 'V'",
+          "Que el incendio fue provocado intencionalmente con sustancias químicas",
+          "Que la estructura sufrió daños sísmicos previos al siniestro",
+          "Que el material de la pared tenía baja resistencia al fuego"
+        ],
+        explanation: "El fuego asciende expandiéndose lateralmente, dibujando un cono o 'V' cuya base apunta hacia el punto de inicio de la combustión."
+      },
+      {
+        id: 9,
+        chapter: "Cap. 7 — Consideraciones Legales en Venezuela",
+        question: "En el ordenamiento jurídico venezolano, ¿qué marco legal penaliza los delitos de incendio y daños agravados?",
+        options: [
+          "El Código Penal Venezolano y leyes especiales de protección ambiental y civil",
+          "Únicamente las ordenanzas municipales de bomberos",
+          "El Código de Comercio y la Ley Orgánica del Trabajo",
+          "Las normas técnicas internacionales NFPA sin validez legal local"
+        ],
+        explanation: "El Código Penal tipifica los delitos contra la seguridad colectiva y la propiedad, incluyendo incendios dolosos y culposos."
+      },
+      {
+        id: 10,
+        chapter: "Cap. 7 — Consideraciones Legales en Venezuela",
+        question: "¿Por qué es crucial mantener la cadena de custodia en la recolección de evidencias físicas según COVENIN?",
+        options: [
+          "Para garantizar la integridad y admisibilidad legal de la prueba ante los tribunales de justicia",
+          "Para evitar que el laboratorio de criminalística cobre tasas adicionales",
+          "Para cumplir con un protocolo estético de catalogación institucional",
+          "Para acelerar el pago de indemnizaciones por parte de las empresas de seguros"
+        ],
+        explanation: "La cadena de custodia documenta cada transferencia y manipulación de la evidencia física para asegurar que no ha sido alterada ni contaminada."
+      },
+      {
+        id: 11,
+        chapter: "Cap. 8 — Planificación de la Investigación",
+        question: "Antes de iniciar la inspección física de una escena de incendio compleja, el investigador debe:",
+        options: [
+          "Planificar los recursos necesarios, obtener autorizaciones legales y evaluar riesgos de seguridad",
+          "Demoler inmediatamente los escombros para evitar colapsos peatonales",
+          "Emitir un veredicto público a través de medios de comunicación social",
+          "Desconectar el suministro general de agua de toda la ciudad"
+        ],
+        explanation: "La planificación previa garantiza la seguridad del personal, la preservación de indicios y el cumplimiento de los mandatos legales de acceso."
+      },
+      {
+        id: 12,
+        chapter: "Cap. 9 — Fuentes de Información",
+        question: "Además de la inspección ocular forense, ¿qué fuentes de información son vitales para el investigador?",
+        options: [
+          "Testigos presenciales, primeros respondedores (bomberos), peritos y registros meteorológicos",
+          "Rumores de vecinos y publicaciones anónimas en redes sociales",
+          "Opiniones de agentes inmobiliarios de la zona",
+          "Suposiciones de la compañía aseguradora sin verificación técnica"
+        ],
+        explanation: "Las fuentes humanas y documentales (actas de bomberos, entrevistas, partes policiales) complementan la evidencia física hallada en el sitio."
+      },
+      {
+        id: 13,
+        chapter: "Cap. 10 — Documentación en el Lugar del Incendio",
+        question: "¿Qué métodos de registro documental recomienda la norma COVENIN 3507 en la escena?",
+        options: [
+          "Fotografías detalladas, videograbación, planimetría (croquis) y notas escritas sistemáticas",
+          "Únicamente un dibujo a mano alzada sin escala métrica",
+          "Recopilar restos sin fotografiar para agilizar el despeje de la vía",
+          "Grabar audios informales sin registrar fechas ni horas"
+        ],
+        explanation: "La documentación exhaustiva (fotográfica, métrica y descriptiva) congela el estado original de la escena antes de cualquier alteración."
+      },
+      {
+        id: 14,
+        chapter: "Cap. 11 — Recolección y Preservación de Evidencias Físicas",
+        question: "¿Cómo deben envasarse los escombros sospechosos de contener residuos de líquidos acelerantes (hidrocarburos)?",
+        options: [
+          "En envases herméticos limpios como latas metálicas selladas o bolsas especiales de nailon para hidrocarburos",
+          "En bolsas de papel común o cajas de cartón porosas",
+          "Directamente al aire libre expuestos a la luz solar para que se ventilen",
+          "En envases plásticos ordinarios de polietileno blando"
+        ],
+        explanation: "Los envases herméticos metálicos o de nailon especializado evitan la evaporación y contaminación cruzada de vapores de hidrocarburos volátiles."
+      },
+      {
+        id: 15,
+        chapter: "Cap. 12 — Seguridad del Investigador",
+        question: "Durante la inspección post-incendio, ¿cuál es el equipo de protección personal (EPP) mínimo indispensable?",
+        options: [
+          "Casco, botas de seguridad con puntera de acero, guantes resistentes, gafas y protección respiratoria adecuada",
+          "Ropa de calle ligera y zapatos deportivos cómodos",
+          "Traje impermeable de neopreno completo con tanque de oxígeno autónomo",
+          "Uniforme de gala institucional sin elementos reflectivos"
+        ],
+        explanation: "La escena de un incendio presenta riesgos de derrumbe, objetos punzantes, tóxicos y humos residuales, exigiendo EPP riguroso."
+      },
+      {
+        id: 16,
+        chapter: "Cap. 13 — Determinación del Origen",
+        question: "¿Cómo se delimita el punto de origen de un incendio en una edificación?",
+        options: [
+          "Siguiendo el gradiente de daños de menor a mayor afectación térmica hasta hallar el foco con mayor destrucción",
+          "Seleccionando la esquina más visible desde la entrada principal",
+          "Asumiendo siempre que el origen estuvo en la cocina o sala de estar",
+          "Basándose en el testimonio del primer vecino que llamó a emergencias"
+        ],
+        explanation: "El análisis de patrones de fuego, desprendimiento de revestimientos y vector de propagación permite rastrear el camino inverso hasta el foco."
+      },
+      {
+        id: 17,
+        chapter: "Cap. 14 — Determinación de la Causa",
+        question: "Las causas de los incendios se clasifican normativamente en:",
+        options: [
+          "Naturales, accidentales, intencionales (provocados) y indeterminadas",
+          "Eléctricas, mecánicas, hidráulicas y nucleares",
+          "Simples, complejas, fortuitas y negligentes",
+          "Internas, externas, primarias y secundarias"
+        ],
+        explanation: "Esta clasificación estándar permite categorizar fehacientemente el origen del evento tras descartar hipótesis inválidas."
+      },
+      {
+        id: 18,
+        chapter: "Cap. 15 — Investigaciones de Explosiones",
+        question: "¿Cuál es la característica principal que diferencia una explosión de un incendio convencional?",
+        options: [
+          "La velocidad extremadamente rápida de liberación de energía con generación de onda de presión destructiva",
+          "La ausencia total de fuego o llamas visibles en el sitio",
+          "Que ocurren únicamente en espacios abiertos al aire libre",
+          "Que no dejan ningún tipo de escombro ni fragmentos metálicos"
+        ],
+        explanation: "Las explosiones se diferencian por la rápida expansión de gases y la onda expansiva resultante que proyecta escombros radialmente."
+      },
+      {
+        id: 19,
+        chapter: "Cap. 16 — Incendios Relacionados con la Electricidad",
+        question: "¿Qué indicios característicos deja un cortocircuito eléctrico genuino (arco eléctrico primario) en un conductor?",
+        options: [
+          "Pequeñas cuentas de fusión o 'perlas' microscópicas con bordes lisos en el sitio del fallo",
+          "Un estiramiento longitudinal uniforme de todo el cableado",
+          "Un cambio de coloración azul fosforescente en el aislamiento exterior",
+          "La desaparición completa de toda la red de cobre sin dejar residuos"
+        ],
+        explanation: "El calor extremo del arco eléctrico funde localmente el metal del conductor dejando marcas periformes distintivas analizables en laboratorio."
+      },
+      {
+        id: 20,
+        chapter: "Cap. 17 — Incendios en Vehículos",
+        question: "En la investigación de incendios en vehículos automotores, ¿qué área debe inspeccionarse con especial rigor?",
+        options: [
+          "El compartimiento del motor (sistema eléctrico, combustible y líneas de aceite), tablero y sistema de escape",
+          "Únicamente el maletero trasero y la rueda de repuesto",
+          "Los neumáticos y los parachoques de plástico",
+          "El sistema de sonido y la tapicería de los asientos traseros"
+        ],
+        explanation: "La mayoría de los incendios vehiculares accidentales se originan en el compartimiento del motor por fallas eléctricas o fugas de fluidos."
+      },
+      {
+        id: 21,
+        chapter: "Cap. 18 — Incendios Forestales e de Interfaz",
+        question: "¿Qué factores determinan principalmente la propagación de un incendio forestal?",
+        options: [
+          "Topografía del terreno, condiciones meteorológicas (viento, humedad relativa, temperatura) y tipo de combustible vegetal",
+          "La cantidad de vehículos estacionados en las carreteras cercanas",
+          "La altura de las torres de alta tensión de transmisión eléctrica",
+          "El tipo de pavimento de las vías rurales adyacentes"
+        ],
+        explanation: "El comportamiento del fuego forestal responde al triángulo ambiental: viento, pendiente del terreno y disponibilidad de biomasa combustible."
+      },
+      {
+        id: 22,
+        chapter: "Cap. 19 — Incendios Estructurales Complejos y Edificaciones",
+        question: "¿Qué aspecto estructural es crítico evaluar durante la investigación de un incendio industrial de gran envergadura?",
+        options: [
+          "La resistencia al fuego de elementos estructurales (acero, concreto, madera) y posibles sobrecargas de materiales almacenados",
+          "El costo comercial de reposición de la maquinaria importada",
+          "El color de la pintura exterior de la fachada",
+          "La cantidad de oficinas administrativas en el piso superior"
+        ],
+        explanation: "La fatiga térmica debilita vigas y columnas, alterando la estabilidad de la edificación y modificando los flujos del incendio."
+      },
+      {
+        id: 23,
+        chapter: "Cap. 7 y 14 — Incendios Provocados (Arson)",
+        question: "¿Qué indicios físicos sugieren fuertemente la intencionalidad (incendio provocado) en una escena?",
+        options: [
+          "Múltiples puntos de inicio independientes, presencia de residuos de acelerantes y dispositivos de retraso (mechas, retardantes)",
+          "La presencia de un cortocircuito en el tablero principal de electricidad",
+          "El colapso uniforme del techo hacia el centro de la estructura",
+          "La ausencia total de daños en los muebles de madera"
+        ],
+        explanation: "Los focos múltiples desvinculados y el uso de acelerantes químicos son indicios clásicos de origen intencional."
+      },
+      {
+        id: 24,
+        chapter: "Cap. 16 — Sistemas de Gases Combustibles (GLP / Gas Natural)",
+        question: "Al investigar una fuga e ignición de Gas Licuado de Petróleo (GLP), ¿qué característica física debe recordar el investigador respecto al gas?",
+        options: [
+          "Es más pesado que el aire, por lo que tiende a acumularse en zonas bajas, sótanos y niveles inferiores",
+          "Es más liviano que el aire y se disipa instantáneamente hacia la atmósfera superior",
+          "Tiene un olor natural sumamente fuerte e inconfundible sin necesidad de odorizantes",
+          "No es inflamable bajo ninguna condición de presión atmosférica"
+        ],
+        explanation: "El GLP (propano/butano) es más denso que el aire, acumulándose en depresiones del terreno, canaletas y sótanos, creando riesgos explosivos."
+      },
+      {
+        id: 25,
+        chapter: "Cap. 10 y 11 — Informe Pericial Técnico",
+        question: "¿Qué debe contener indispensablemente el informe pericial final de investigación de un incendio según COVENIN?",
+        options: [
+          "Antecedentes, metodología aplicada, descripción de la escena, análisis de evidencias, conclusiones sobre origen y causa, y respaldo documental",
+          "Una carta notariada de condolencias a los propietarios afectados",
+          "Un presupuesto detallado de reconstrucción de la obra civil",
+          "Recortes de periódicos locales sin análisis técnico pericial"
+        ],
+        explanation: "El informe pericial es un documento técnico-legal riguroso que sustenta de manera objetiva y fundamentada las conclusiones del investigador."
+      },
+      // 40 preguntas adicionales para completar el robusto banco de 65 reactivos normativos
+      {
+        id: 26,
+        chapter: "Cap. 3 — Definiciones Técnicas",
+        question: "¿Cómo define la norma COVENIN 3507 el término 'Causa' de un incendio?",
+        options: [
+          "Las circunstancias, condiciones o agentes que provocaron que la fuente de ignición y el combustible se pusieran en contacto",
+          "El lugar físico exacto donde comenzó el proceso de combustión",
+          "La cantidad total de kilocalorías liberadas durante el siniestro",
+          "El tiempo transcurrido entre la llamada de auxilio y la llegada del camión de bomberos"
+        ],
+        explanation: "La causa explica el porqué y cómo interactuaron el combustible, el comburente y la fuente de calor inicial."
+      },
+      {
+        id: 27,
+        chapter: "Cap. 4 — Metodología Básica",
+        question: "Si durante la investigación surge una nueva evidencia que contradice la hipótesis inicial, el investigador debe:",
+        options: [
+          "Modificar o descartar la hipótesis y replantear el análisis conforme al método científico",
+          "Ignorar la evidencia para no alterar el informe ya redactado",
+          "Ocultar el hallazgo para proteger la reputación de los propietarios",
+          "Atribuir el resultado a un error del laboratorio criminalístico"
+        ],
+        explanation: "El método científico exige flexibilidad y objetividad para ajustar las hipótesis a medida que se recopilan datos nuevos."
+      },
+      {
+        id: 28,
+        chapter: "Cap. 5 — Ciencia del Fuego",
+        question: "¿Qué fenómeno de transferencia de calor predomina a través de estructuras sólidas metálicas o muros contiguos?",
+        options: [
+          "Conducción",
+          "Convección",
+          "Radiación electromagnética directa",
+          "Evaporación adiabática"
+        ],
+        explanation: "La conducción es la transferencia de calor molecular a través de cuerpos sólidos en contacto directo."
+      },
+      {
+        id: 29,
+        chapter: "Cap. 5 — Ciencia del Fuego",
+        question: "¿Cómo se propaga el calor a través del espacio libre en forma de ondas electromagnéticas sin requerir contacto material?",
+        options: [
+          "Radiación",
+          "Convección forzada",
+          "Transducción térmica",
+          "Conducción gaseosa"
+        ],
+        explanation: "La radiación térmica viaja en línea recta en forma de ondas electromagnéticas, carbonizando superficies distantes."
+      },
+      {
+        id: 30,
+        chapter: "Cap. 6 — Marcas de Fuego",
+        question: "¿Qué revelan las astillas de madera quemadas con patrones de 'cerezas' o ampollas brillantes?",
+        options: [
+          "Una tasa de incremento rápido de temperatura asociada frecuentemente al uso de acelerantes o fuegos intensos",
+          "Que la madera estuvo sumergida en agua salada antes del incendio",
+          "Que el árbol sufrió una enfermedad fitosanitaria previa",
+          "Que el incendio duró varios días a temperatura constante"
+        ],
+        explanation: "Los patrones de ampollamiento rápido en maderas duras indican exposición a calor intenso y repentino."
+      },
+      {
+        id: 31,
+        chapter: "Cap. 7 — Aspectos Legales",
+        question: "En Venezuela, ¿quiénes tienen la competencia legal inicial para realizar experticias técnicas de incendios en el sitio del suceso?",
+        options: [
+          "Los Cuerpos de Bomberos especializados en investigación de incendios y los órganos de investigaciones penales (CICPC)",
+          "Cualquier ciudadano particular con licencia de conducir",
+          "Los agentes de seguros de automóviles y propiedades",
+          "Los concejos comunales de la localidad"
+        ],
+        explanation: "La normativa legal y constitucional otorga esta atribución pericial a los bomberos técnicos y policías de investigación penal."
+      },
+      {
+        id: 32,
+        chapter: "Cap. 8 — Planificación",
+        question: "¿Por qué es importante asegurar el perímetro de la escena inmediatamente después de extinguido el fuego?",
+        options: [
+          "Para evitar la contaminación, alteración o sustracción de evidencias físicas por curiosos o terceros",
+          "Para cobrar peaje a los vehículos que transiten por la calle",
+          "Para impedir que los bomberos realicen el trabajo de escompile",
+          "Para cumplir con un requisito decorativo municipal"
+        ],
+        explanation: "El control de acceso preserva la escena intacta para que los peritos puedan realizar su labor sin interferencias."
+      },
+      {
+        id: 33,
+        chapter: "Cap. 9 — Fuentes de Información",
+        question: "¿Qué utilidad aportan los registros de llamadas telefónicas y centrales de emergencia (911 / Bomberos)?",
+        options: [
+          "Permiten establecer la hora exacta de detección del siniestro y la evolución temporal del fuego",
+          "Sirven para conocer la marca de los teléfonos celulares de los vecinos",
+          "No tienen ninguna relevancia para la investigación técnica",
+          "Permiten calcular el presupuesto de la alcaldía"
+        ],
+        explanation: "La cronología precisa basada en registros de llamadas ayuda a validar los testimonios y la velocidad de propagación."
+      },
+      {
+        id: 34,
+        chapter: "Cap. 10 — Documentación Fotográfica",
+        question: "Al tomar fotografías periciales en la escena, ¿qué elemento no debe faltar junto a la evidencia relevante?",
+        options: [
+          "Un testigo métrico (regla o escala) para documentar dimensiones y proporciones",
+          "Un ramo de flores decorativo",
+          "El rostro del investigador sonriendo",
+          "Una moneda de curso legal internacional"
+        ],
+        explanation: "El testigo métrico en la fotografía forense proporciona escala dimensional indispensable para el análisis posterior."
+      },
+      {
+        id: 35,
+        chapter: "Cap. 11 — Evidencias Físicas",
+        question: "¿Qué puede indicar la presencia de metales fundidos (como aluminio o cobre) en el piso del origen?",
+        options: [
+          "Que la temperatura ambiente en ese punto superó el punto de fusión de dichos metales durante el incendio",
+          "Que alguien arrojó monedas a propósito antes del fuego",
+          "Que la instalación eléctrica tenía voltaje superior a 10.000 voltios",
+          "Que el techo era de cartón piedra"
+        ],
+        explanation: "Los puntos de fusión de los metales ayudan a estimar el rango mínimo de temperatura alcanzado en zonas específicas."
+      },
+      {
+        id: 36,
+        chapter: "Cap. 12 — Seguridad",
+        question: "Antes de ingresar a una estructura afectada por incendio con riesgo de colapso, el investigador debe:",
+        options: [
+          "Solicitar la evaluación estructural por parte de ingenieros o personal de rescate calificado",
+          "Ingresar corriendo para rescatar objetos de valor",
+          "Apoyarse fuertemente en las paredes debilitadas",
+          "Encender velas para iluminar los rincones oscuros"
+        ],
+        explanation: "La seguridad estructural debe ser certificada antes de exponer al investigador a colapsos de techos o muros."
+      },
+      {
+        id: 37,
+        chapter: "Cap. 13 — Origen",
+        question: "¿Qué son los 'indicios de dirección' (patterns of damage) en una inspección de origen?",
+        options: [
+          "Marcas físicas que muestran hacia dónde se propagó el fuego desde su fuente (calor, inclinación de resortes, spalling)",
+          "Señales de tránsito pintadas en las paredes por los bomberos",
+          "Instrucciones de evacuación de emergencia de la empresa",
+          "Mapas turísticos encontrados en los escritorios"
+        ],
+        explanation: "Los patrones de daños direccionales indican el vector y sentido de avance de las llamas."
+      },
+      {
+        id: 38,
+        chapter: "Cap. 14 — Causas",
+        question: "Un incendio causado por el contacto prolongado de material combustible con una tubería de vapor mal aislada se cataloga como:",
+        options: [
+          "Causa accidental por fuente térmica de calor de superficie caliente",
+          "Causa natural por radiación solar",
+          "Causa intencional por artefacto incendiario",
+          "Causa indeterminada sin explicación física"
+        ],
+        explanation: "El contacto con superficies calientes industriales es una causa accidental común de ignición por conducción térmica."
+      },
+      {
+        id: 39,
+        chapter: "Cap. 15 — Explosiones",
+        question: "¿Qué es el 'centro de la explosión' (epicentro)?",
+        options: [
+          "El punto tridimensional exacto donde se inició la liberación repentina de energía expansiva",
+          "La puerta principal de entrada al edificio afectado",
+          "El lugar donde cayeron los vidrios más grandes de las ventanas",
+          "La oficina del gerente general de la planta"
+        ],
+        explanation: "El epicentro se localiza analizando los vectores de proyección de escombros y daños estructurales en dirección convergente hacia atrás."
+      },
+      {
+        id: 40,
+        chapter: "Cap. 16 — Electricidad",
+        question: "¿Qué diferencia existe entre un arco eléctrico primario y un arco eléctrico secundario por fuego?",
+        options: [
+          "El primario causó el incendio al fallar el aislamiento; el secundario fue producido porque el fuego externo derritió el aislamiento del cable",
+          "El primario ocurre solo de noche y el secundario de día",
+          "No existe ninguna diferencia técnica entre ambos arcos",
+          "El primario es inocuo y el secundario genera explosiones nucleares"
+        ],
+        explanation: "Distinguir arcos primarios (causa) de secundarios (efecto del fuego) es vital para no culpar erróneamente a la electricidad."
+      },
+      {
+        id: 41,
+        chapter: "Cap. 17 — Vehículos",
+        question: "Al investigar el incendio de un vehículo donde se sospecha fraude al seguro, ¿qué componente es clave examinar en el panel de instrumentos?",
+        options: [
+          "El interruptor de encendido (switch), odómetro y conexiones del tablero de fusibles en busca de puentes artificiales",
+          "El color de la pintura de los retrovisores laterales",
+          "La marca de los limpiaparabrisas delanteros",
+          "El nivel del líquido refrigerante del radiador"
+        ],
+        explanation: "Los indicios demanipulación artificial en los circuitos eléctricos del tablero frecuentemente delatan sabotajes."
+      },
+      {
+        id: 42,
+        chapter: "Cap. 18 — Incendios Forestales",
+        question: "¿Qué indica un patrón de avance en forma de abanico angosto en pastizales?",
+        options: [
+          "La dirección predominante del viento en el momento de la ignición",
+          "Que el terreno fue fumigado con pesticidas",
+          "Que el fuego fue apagado con helicópteros cisterna",
+          "Que el suelo contiene altas concentraciones de oro"
+        ],
+        explanation: "El viento inclina las llamas y estira el cono de propagación en la dirección de sotavento."
+      },
+      {
+        id: 43,
+        chapter: "Cap. 19 — Edificaciones",
+        question: "¿Qué efecto produce el fenómeno de 'Spalling' (desiscación o desprendimiento explosivo del concreto) ante altas temperaturas?",
+        options: [
+          "La explosión y desprendimiento de la superficie del concreto debido a la presión del vapor de agua atrapado en sus poros",
+          "La transformación del concreto en oro puro",
+          "El endurecimiento instantáneo de las estructuras metálicas internas",
+          "La impermeabilización total de los muros perimetrales"
+        ],
+        explanation: "El agua retenida en el concreto se evapora violentamente bajo fuego intenso, saltando fragmentos de cemento."
+      },
+      {
+        id: 44,
+        chapter: "Cap. 7 — Legal",
+        question: "¿Qué valor probatorio tiene un dictamen pericial emitido conforme a la norma COVENIN 3507 en un juicio oral y público?",
+        options: [
+          "Sirve como prueba pericial experta para ilustrar y convencer al juez sobre los aspectos técnicos del siniestro",
+          "Es un documento opcional sin ninguna validez jurídica",
+          "Sustituye por completo la declaración del juez y de los fiscales",
+          "Solo sirve como recibo de pago de honorarios profesionales"
+        ],
+        explanation: "El peritaje técnico fundamentado científicamente es pilar probatorio en los procesos judiciales penales y civiles."
+      },
+      {
+        id: 45,
+        chapter: "Cap. 10 — Documentación",
+        question: "¿Por qué se deben tomar notas manuscritas detalladas en el sitio aunque se use cámara fotográfica?",
+        options: [
+          "Porque las notas registran dimensiones, olores, texturas y observaciones subjetivas que la cámara por sí sola no captura",
+          "Para cumplir con una tradición escolar antigua",
+          "Porque las cámaras fotográficas están prohibidas en zonas de siniestro",
+          "Para gastar papel institucional innecesariamente"
+        ],
+        explanation: "Las notas de campo complementan las imágenes registrando datos métricos, condiciones ambientales y croquis."
+      },
+      {
+        id: 46,
+        chapter: "Cap. 11 — Evidencias",
+        question: "En la toma de muestras de suelo en busca de acelerantes, ¿por qué se debe tomar una muestra 'testigo' o control en zona virgen?",
+        options: [
+          "Para comparar el sustrato limpio con la muestra sospechosa y descartar interferencias naturales del terreno",
+          "Para rellenar el hueco dejado en la excavación",
+          "Para regalársela al laboratorio como recuerdo",
+          "Para verificar si el suelo sirve para agricultura"
+        ],
+        explanation: "La muestra testigo garantiza que los compuestos hallados no provengan naturalmente del suelo o contaminantes previos."
+      },
+      {
+        id: 47,
+        chapter: "Cap. 4 — Metodología",
+        question: "¿Qué es una 'hipótesis de trabajo' en la investigación de incendios?",
+        options: [
+          "Una suposición razonada y provisional basada en los datos recolectados que debe ser probada o refutada",
+          "La conclusión definitiva firmada por el fiscal del Ministerio Público",
+          "Un inventario de los bienes asegurados que se perdieron",
+          "Un cálculo matemático de la resistencia de los materiales"
+        ],
+        explanation: "Las hipótesis guían la recolección selectiva de evidencias hasta validarlas científicamente."
+      },
+      {
+        id: 48,
+        chapter: "Cap. 5 — Ciencia del Fuego",
+        question: "¿Qué rol juega el oxígeno atmosférico estándar (aprox. 21%) en la combustión?",
+        options: [
+          "Actúa como agente comburente indispensable para sostener la oxidación rápida",
+          "Funciona como combustible principal en fuegos de clase A",
+          "Sirve como retardante natural que apaga las llamas",
+          "No interviene en ninguna reacción química del fuego"
+        ],
+        explanation: "El comburente (oxígeno) sustenta la reacción exotérmica de oxidación."
+      },
+      {
+        id: 49,
+        chapter: "Cap. 13 — Origen",
+        question: "¿Qué indica la caída de los resortes de un colchón o mueble tapizado hacia el lado expuesto al calor?",
+        options: [
+          "La dirección y proximidad de la fuente de calor externa que ablandó el metal",
+          "Que el colchón era de fabricación defectuosa",
+          "Que el mueble fue trasladado después de apagado el fuego",
+          "Que la humedad relativa del ambiente era superior al 90%"
+        ],
+        explanation: "Los resortes pierden temple y se deforman o inclinan hacia el lado donde recibieron mayor temperatura."
+      },
+      {
+        id: 50,
+        chapter: "Cap. 14 — Causas",
+        question: "¿Cómo se cataloga un incendio originado por la caída de un rayo durante una tormenta eléctrica?",
+        options: [
+          "Causa natural",
+          "Causa intencional",
+          "Causa eléctrica por negligencia humana",
+          "Causa mecánica por fricción"
+        ],
+        explanation: "Los fenómenos atmosféricos como rayos se clasifican normativamente como causas naturales."
+      },
+      {
+        id: 51,
+        chapter: "Cap. 16 — Electricidad",
+        question: "¿Qué es una sobrecarga eléctrica y cómo puede iniciar un incendio?",
+        options: [
+          "Circulación de corriente superior a la capacidad nominal del conductor, generando calor excesivo y deterioro del aislamiento",
+          "La falta total de suministro eléctrico en la zona",
+          "Un rayo caído a 5 kilómetros de distancia",
+          "El uso de bombillos LED de bajo consumo"
+        ],
+        explanation: "El exceso de corriente calienta los conductores por efecto Joule hasta fundir o incendiar materiales adyacentes."
+      },
+      {
+        id: 52,
+        chapter: "Cap. 18 — Incendios Forestales",
+        question: "¿Qué es la 'copa del árbol' (crown fire) en la dinámica forestal?",
+        options: [
+          "Un incendio que se propaga a través de las copas superiores de los árboles impulsado por el viento",
+          "Un árbol que sobrevive intacto al paso del fuego",
+          "La raíz principal subterránea de la vegetación",
+          "Un sistema de riego automático forestal"
+        ],
+        explanation: "Los incendios de copa son altamente destructivos y veloces debido al oxígeno disponible en altura."
+      },
+      {
+        id: 53,
+        chapter: "Cap. 10 — Documentación",
+        question: "¿Por qué es fundamental realizar un croquis planimétrico acotado de la escena?",
+        options: [
+          "Para ubicar espacialmente la posición de los indicios, mobiliario y punto de origen con mediciones exactas",
+          "Para decorar el informe pericial con dibujos artísticos",
+          "Para calcular el valor comercial del terreno",
+          "Para reemplazar por completo la inspección ocular"
+        ],
+        explanation: "El croquis proporciona un mapa métrico y espacial indispensable para reconstruir el escenario del siniestro."
+      },
+      {
+        id: 54,
+        chapter: "Cap. 11 — Evidencias",
+        question: "¿Qué precaución debe tenerse al recolectar interruptores o breaker eléctricos quemados?",
+        options: [
+          "Documentar su posición exacta (ON, OFF, TRIP) antes de desmontarlos y manipularlos con cuidado",
+          "Golpearlos fuertemente para verificar su resistencia",
+          "Sumergirlos en agua para limpiarlos del hollín",
+          "Descartarlos por carecer de valor probatorio"
+        ],
+        explanation: "La posición de los interruptores automáticos (breaker) aporta datos cruciales sobre el estado eléctrico al momento del corte."
+      },
+      {
+        id: 55,
+        chapter: "Cap. 15 — Explosiones",
+        question: "¿Qué efectos produce el 'cráter' formado en el punto de detonación de una carga explosiva condensada?",
+        options: [
+          "Una depresión o cavidad excavada en el suelo o superficie debido al desplazamiento violento de material por la onda expansiva",
+          "Un montículo de cenizas blancas sin importancia",
+          "Una zona de cultivo agrícola altamente fértil",
+          "Un campo magnético permanente"
+        ],
+        explanation: "El cráter es la firma geométrica del epicentro de una detonación de alta potencia."
+      },
+      {
+        id: 56,
+        chapter: "Cap. 17 — Vehículos",
+        question: "¿Qué puede indicar la presencia de un acumulador (batería) con bornes fundidos y cortocircuito interno en un auto quemado?",
+        options: [
+          "Una posible fuente de ignición eléctrica inicial o daño secundario severo por calor en el compartimiento",
+          "Que el vehículo utilizaba combustible ecológico",
+          "Que el sistema de frenos funcionaba perfectamente",
+          "Que las bujías eran de platino"
+        ],
+        explanation: "Las baterías de plomo-ácido generan arcos eléctricos intensos si sufren cortocircuitos o colisiones frontales."
+      },
+      {
+        id: 57,
+        chapter: "Cap. 7 — Legal",
+        question: "¿Qué implica legalmente la alteración dolosa o culposa de la escena de un incendio antes de la pericia?",
+        options: [
+          "La obstrucción de la justicia y posibles sanciones penales tipificadas en el Código Penal",
+          "Un ascenso automático para el personal de limpieza",
+          "Una felicitación por parte de la alcaldía municipal",
+          "La exoneración total de impuestos para los dueños"
+        ],
+        explanation: "Alterar la escena destruye pruebas y constituye delito contra la administración de justicia."
+      },
+      {
+        id: 58,
+        chapter: "Cap. 4 — Metodología",
+        question: "¿En qué consiste la fase de 'recolección de datos' en la investigación según COVENIN?",
+        options: [
+          "En observar, fotografiar, entrevistar, medir y extraer evidencias físicas de manera sistemática",
+          "En adivinar las causas basándose en supersticiones",
+          "En cerrar el caso en menos de 10 minutos sin inspeccionar",
+          "En cobrar los honorarios profesionales anticipadamente"
+        ],
+        explanation: "La recolección rigurosa de datos empíricos es la base sobre la cual se construye todo el análisis pericial."
+      },
+      {
+        id: 59,
+        chapter: "Cap. 5 — Ciencia del Fuego",
+        question: "¿Qué es el 'punto de inflamación' (flash point) de un líquido combustible?",
+        options: [
+          "La temperatura mínima a la cual el líquido desprende suficientes vapores para formar una mezcla inflamable con el aire al contacto con una chispa",
+          "La temperatura máxima a la cual el agua hierve a nivel del mar",
+          "El momento en que el líquido se congela en hielo sólido",
+          "La presión barométrica en días lluviosos"
+        ],
+        explanation: "El flash point define la facilidad con que un líquido emite vapores inflamables."
+      },
+      {
+        id: 60,
+        chapter: "Cap. 6 — Marcas de Fuego",
+        question: "¿Qué es el fenómeno de 'calcinación' en yeso o paredes expuestas al fuego?",
+        options: [
+          "La pérdida de agua químicamente ligada en los materiales de construcción por acción del calor intenso, mostrando profundidad de daño",
+          "El cambio de color de la pintura por la luz solar",
+          "La acumulación de polvo doméstico en los rincones",
+          "El crecimiento de hongos en paredes húmedas"
+        ],
+        explanation: "La profundidad de calcinación en revestimientos de yeso permite estimar la dirección e intensidad del flujo térmico."
+      },
+      {
+        id: 61,
+        chapter: "Cap. 12 — Seguridad",
+        question: "¿Por qué se prohíbe el consumo de alimentos o bebidas dentro de una escena de incendio bajo inspección?",
+        options: [
+          "Por el grave riesgo de ingestión o inhalación de sustancias tóxicas, cenizas y metales pesados presentes en el ambiente",
+          "Para ahorrar presupuesto en refrigerios institucionales",
+          "Porque los bomberos se ponen celosos",
+          "Para cumplir con una norma estética de oficina"
+        ],
+        explanation: "Los residuos tóxicos (dioxinas, furanos, metales) contaminan alimentos y ponen en riesgo la salud del perito."
+      },
+      {
+        id: 62,
+        chapter: "Cap. 14 — Causas",
+        question: "¿Cómo se define un incendio de causa 'Indeterminada'?",
+        options: [
+          "Aquel en el cual, a pesar de una exhaustiva investigación y aplicación del método científico, no se pudo hallar evidencia concluyente de su origen específico",
+          "Aquel que ocurrió durante la medianoche",
+          "Aquel que fue apagado por la lluvia natural",
+          "Aquel que no causó daños materiales en la estructura"
+        ],
+        explanation: "Cuando la destrucción es tan absoluta que no quedan datos para probar una hipótesis, la causa se declara indeterminada honestamente."
+      },
+      {
+        id: 63,
+        chapter: "Cap. 16 — Electricidad",
+        question: "¿Qué función cumple un dispositivo diferencial (protector contra corrientes de falla a tierra o ID) en la seguridad eléctrica?",
+        options: [
+          "Desconectar automáticamente el circuito al detectar fugas de corriente hacia tierra, previniendo electrocuciones e incendios",
+          "Aumentar el voltaje de los tomacorrientes",
+          "Ahorrar energía en las facturas mensuales",
+          "Iluminar la casa durante los apagones"
+        ],
+        explanation: "Los protectores diferenciales previenen fallas de aislamiento peligrosas que pueden derivar en arcos e incendios."
+      },
+      {
+        id: 64,
+        chapter: "Cap. 10 y 11 — Informe Pericial",
+        question: "¿Por qué los dictámenes periciales deben ser redactados con lenguaje técnico, claro, objetivo y libre de ambigüedades?",
+        options: [
+          "Para que sean perfectamente comprensibles y valorados por jueces, fiscales y abogados sin confusiones técnicas",
+          "Para impresionar a los lectores con términos incomprensibles",
+          "Para cumplir con un requisito de caligrafía obligatoria",
+          "Para ocultar errores metodológicos del investigador"
+        ],
+        explanation: "La claridad y rigor científico garantizan la utilidad legal y pericial del dictamen ante los tribunales."
+      },
+      {
+        id: 65,
+        chapter: "Cap. 1 a 19 — Resumen COVENIN 3507:1999",
+        question: "En síntesis, ¿cuál es el objetivo último de la investigación científica de un incendio según COVENIN 3507?",
+        options: [
+          "Prevenir futuros siniestros mediante la determinación veraz de causas, mejorando normas de seguridad y combatiendo la impunidad",
+          "Establecer récords de velocidad en liquidación de seguros",
+          "Redecorar las zonas urbanas afectadas",
+          "Generar estadísticas confidenciales sin aplicación práctica"
+        ],
+        explanation: "El fin supremo de la investigación es la prevención de siniestros futuros y la aplicación de la justicia técnica."
+      }
+    ];
+
+    // ==================== ESTADO DE LA APLICACIÓN ====================
+    let quizState = {
+      participantName: '',
+      participantId: '',
+      participantCohort: '',
+      questions: [],
+      userAnswers: [],
+      currentIndex: 0,
+      startTime: null,
+      timerInterval: null,
+      elapsedSeconds: 0,
+      lastResult: null
+    };
+
+    // ==================== UTILIDADES ====================
+    function shuffleArray(array) {
+      const arr = [...array];
+      for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+      }
+      return arr;
+    }
+
+    function formatDuration(totalSeconds) {
+      const mins = Math.floor(totalSeconds / 60);
+      const secs = totalSeconds % 60;
+      return `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+    }
+
+    function formatScore(scoreNum) {
+      return Number(scoreNum).toFixed(2).replace('.', ',');
+    }
+
+    function showToast(message, type = 'success') {
+      const container = document.getElementById('toast-container');
+      const content = document.getElementById('toast-content');
+      const icon = document.getElementById('toast-icon');
+      const msg = document.getElementById('toast-msg');
+
+      msg.textContent = message;
+      content.className = `px-5 py-3 rounded-xl shadow-2xl border font-semibold text-sm flex items-center gap-3 ${
+        type === 'success'
+          ? 'bg-emerald-950 border-emerald-700 text-emerald-200'
+          : type === 'error'
+          ? 'bg-red-950 border-red-700 text-red-200'
+          : 'bg-slate-900 border-slate-700 text-slate-200'
+      }`;
+
+      icon.innerHTML = type === 'success'
+        ? `<svg class="w-5 h-5 text-emerald-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>`
+        : type === 'error'
+        ? `<svg class="w-5 h-5 text-red-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>`
+        : `<svg class="w-5 h-5 text-amber-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>`;
+
+      container.classList.remove('translate-y-20', 'opacity-0', 'pointer-events-none');
+      setTimeout(() => {
+        container.classList.add('translate-y-20', 'opacity-0', 'pointer-events-none');
+      }, 3500);
+    }
+
+    // ==================== CONTROL DE SESIÓN DOCENTE ====================
+    function updateTeacherNavBadge() {
+      const icon = document.getElementById('nav-history-lock-icon');
+      if (!icon) return;
+      if (isTeacherAuthenticated) {
+        icon.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" d="M8 11V7a4 4 0 118 0m-4 8v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z" />`;
+      } else {
+        icon.innerHTML = `<path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />`;
+      }
+    }
+
+    window.lockTeacherSession = function(redirectHome = false) {
+      isTeacherAuthenticated = false;
+      updateTeacherNavBadge();
+      const gate = document.getElementById('teacher-gate-panel');
+      const dash = document.getElementById('teacher-dashboard-panel');
+      const passInput = document.getElementById('teacher-password-input');
+      const errEl = document.getElementById('teacher-login-error');
+
+      if (gate) gate.classList.remove('hidden');
+      if (dash) dash.classList.add('hidden');
+      if (passInput) passInput.value = '';
+      if (errEl) errEl.classList.add('hidden');
+
+      if (redirectHome) {
+        showToast('Sesión docente cerrada. El registro vuelve a estar bloqueado.', 'info');
+        switchView('home', false);
+      }
+    };
+
+    window.togglePasswordVisibility = function(inputId, iconId) {
+      const input = document.getElementById(inputId);
+      if (!input) return;
+      input.type = input.type === 'password' ? 'text' : 'password';
+    };
+
+    document.getElementById('teacher-login-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const input = document.getElementById('teacher-password-input');
+      const errEl = document.getElementById('teacher-login-error');
+      const entered = (input.value || '').trim();
+
+      if (!entered) {
+        errEl.textContent = 'Por favor, ingrese la clave de acceso del profesor.';
+        errEl.classList.remove('hidden');
+        return;
+      }
+
+      const validPass = getActiveTeacherPassword();
+
+      if (entered === validPass || simpleHash(entered) === simpleHash(validPass)) {
+        isTeacherAuthenticated = true;
+        errEl.classList.add('hidden');
+        input.value = '';
+        updateTeacherNavBadge();
+        document.getElementById('teacher-gate-panel').classList.add('hidden');
+        document.getElementById('teacher-dashboard-panel').classList.remove('hidden');
+        renderHistoryTable();
+        showToast('Acceso docente concedido.', 'success');
+      } else {
+        errEl.textContent = 'Clave incorrecta. Verifique sus credenciales de docente e intente nuevamente.';
+        errEl.classList.remove('hidden');
+        input.focus();
+        input.select();
+      }
+    });
+
+    window.toggleChangePasswordModal = function(show) {
+      const modal = document.getElementById('change-password-modal');
+      const errEl = document.getElementById('change-pass-error');
+      if (show) {
+        document.getElementById('current-teacher-pass').value = '';
+        document.getElementById('new-teacher-pass').value = '';
+        document.getElementById('confirm-teacher-pass').value = '';
+        errEl.classList.add('hidden');
+        modal.classList.remove('hidden');
+      } else {
+        modal.classList.add('hidden');
+      }
+    };
+
+    document.getElementById('change-password-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const currentPass = document.getElementById('current-teacher-pass').value.trim();
+      const newPass = document.getElementById('new-teacher-pass').value.trim();
+      const confirmPass = document.getElementById('confirm-teacher-pass').value.trim();
+      const errEl = document.getElementById('change-pass-error');
+
+      const validPass = getActiveTeacherPassword();
+
+      if (currentPass !== validPass && simpleHash(currentPass) !== simpleHash(validPass)) {
+        errEl.textContent = 'La clave docente actual ingresada es incorrecta.';
+        errEl.classList.remove('hidden');
+        return;
+      }
+      if (newPass.length < 4) {
+        errEl.textContent = 'La nueva clave docente debe contener al menos 4 caracteres.';
+        errEl.classList.remove('hidden');
+        return;
+      }
+      if (newPass !== confirmPass) {
+        errEl.textContent = 'La confirmación de la nueva clave no coincide.';
+        errEl.classList.remove('hidden');
+        return;
+      }
+
+      localStorage.setItem(LOCAL_TEACHER_PASS_KEY, newPass);
+      toggleChangePasswordModal(false);
+      showToast('Clave docente actualizada correctamente.', 'success');
+    });
+
+    // ==================== NAVEGACIÓN ENTRE VISTAS ====================
+    window.switchView = function(viewName, autoLockTeacher = true) {
+      if (viewName !== 'history' && isTeacherAuthenticated && autoLockTeacher) {
+        lockTeacherSession(false);
+      }
+
+      const views = ['home', 'quiz', 'results', 'history'];
+      views.forEach(v => {
+        const el = document.getElementById(`view-${v}`);
+        if (el) el.classList.add('hidden');
+      });
+      const target = document.getElementById(`view-${viewName}`);
+      if (target) target.classList.remove('hidden');
+
+      if (viewName === 'history') {
+        if (isTeacherAuthenticated) {
+          document.getElementById('teacher-gate-panel').classList.add('hidden');
+          document.getElementById('teacher-dashboard-panel').classList.remove('hidden');
+          renderHistoryTable();
+        } else {
+          document.getElementById('teacher-gate-panel').classList.remove('hidden');
+          document.getElementById('teacher-dashboard-panel').classList.add('hidden');
+          setTimeout(() => document.getElementById('teacher-password-input')?.focus(), 80);
+        }
+      }
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+
+    // ==================== INICIO DE INTENTO ====================
+    document.getElementById('start-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const nameInput = document.getElementById('participant-name');
+      const idInput = document.getElementById('participant-id');
+      const cohortInput = document.getElementById('participant-cohort');
+      const errName = document.getElementById('error-name');
+      const errId = document.getElementById('error-id');
+
+      const nameVal = nameInput.value.trim();
+      const idVal = idInput.value.trim();
+      const cohortVal = (cohortInput?.value || '').trim();
+
+      let valid = true;
+      if (!nameVal) {
+        errName.classList.remove('hidden');
+        nameInput.classList.add('border-red-500');
+        valid = false;
+      } else {
+        errName.classList.add('hidden');
+        nameInput.classList.remove('border-red-500');
+      }
+
+      if (!idVal) {
+        errId.classList.remove('hidden');
+        idInput.classList.add('border-red-500');
+        valid = false;
+      } else {
+        errId.classList.add('hidden');
+        idInput.classList.remove('border-red-500');
+      }
+
+      if (!valid) {
+        showToast('Complete su Nombre Completo y Cédula para iniciar.', 'error');
+        return;
+      }
+
+      beginQuiz(nameVal, idVal, cohortVal);
+    });
+
+    function beginQuiz(name, idNumber, cohort = '') {
+      const selected = shuffleArray(QUESTION_BANK).slice(0, 25).map(q => {
+        const indexedOptions = q.options.map((text, idx) => ({
+          text,
+          isCorrect: idx === 0
+        }));
+        const shuffledOptions = shuffleArray(indexedOptions);
+        const correctIndex = shuffledOptions.findIndex(o => o.isCorrect);
+
+        return {
+          id: q.id,
+          chapter: q.chapter,
+          question: q.question,
+          options: shuffledOptions.map(o => o.text),
+          correctIndex,
+          explanation: q.explanation
+        };
+      });
+
+      if (quizState.timerInterval) clearInterval(quizState.timerInterval);
+
+      quizState = {
+        participantName: name,
+        participantId: idNumber,
+        participantCohort: cohort,
+        questions: selected,
+        userAnswers: new Array(25).fill(null),
+        currentIndex: 0,
+        startTime: Date.now(),
+        timerInterval: null,
+        elapsedSeconds: 0,
+        lastResult: null
+      };
+
+      document.getElementById('quiz-display-name').textContent = name;
+      document.getElementById('quiz-display-id').textContent = cohort ? `C.I. ${idNumber} • ${cohort}` : `C.I. ${idNumber}`;
+      document.getElementById('quiz-timer').textContent = '00:00';
+
+      quizState.timerInterval = setInterval(() => {
+        quizState.elapsedSeconds = Math.floor((Date.now() - quizState.startTime) / 1000);
+        document.getElementById('quiz-timer').textContent = formatDuration(quizState.elapsedSeconds);
+      }, 1000);
+
+      renderQuestionNavGrid();
+      renderCurrentQuestion();
+      switchView('quiz');
+      showToast('Evaluación generada con 25 reactivos aleatorios de COVENIN 3507:1999.', 'info');
+    }
+
+    window.startNewAttemptSameUser = function() {
+      if (quizState.participantName && quizState.participantId) {
+        beginQuiz(quizState.participantName, quizState.participantId, quizState.participantCohort || '');
+      } else {
+        switchView('home');
+      }
+    };
+
+    // ==================== RENDERIZADO DEL CUESTIONARIO ====================
+    function renderQuestionNavGrid() {
+      const grid = document.getElementById('question-nav-grid');
+      grid.innerHTML = quizState.questions.forEach ? '' : '';
+      let html = '';
+      for (let i = 0; i < 25; i++) {
+        const answered = quizState.userAnswers[i] !== null;
+        const current = i === quizState.currentIndex;
+        html += `
+          <button type="button" onclick="goToQuestion(${i})" class="w-8 h-8 rounded-lg font-mono text-xs font-bold transition flex items-center justify-center ${
+            current
+              ? 'bg-red-700 text-white ring-2 ring-red-400'
+              : answered
+              ? 'bg-emerald-900 text-emerald-200 border border-emerald-700'
+              : 'bg-slate-800 text-slate-300 border border-slate-700 hover:bg-slate-700'
+          }">
+            ${i + 1}
+          </button>
+        `;
+      }
+      grid.innerHTML = html;
+    }
+
+    function renderCurrentQuestion() {
+      const idx = quizState.currentIndex;
+      const q = quizState.questions[idx];
+
+      document.getElementById('quiz-chapter-tag').textContent = q.chapter;
+      document.getElementById('question-number-badge').textContent = `Pregunta ${idx + 1} / 25`;
+      document.getElementById('quiz-progress-text').textContent = `${idx + 1} / 25`;
+      document.getElementById('question-text').textContent = q.question;
+
+      const optsContainer = document.getElementById('options-container');
+      optsContainer.innerHTML = q.options.map((opt, oIdx) => {
+        const selected = quizState.userAnswers[idx] === oIdx;
+        return `
+          <label class="flex items-start gap-3.5 p-4 rounded-xl border cursor-pointer transition ${
+            selected
+              ? 'bg-red-950/40 border-red-600 text-white shadow-md'
+              : 'bg-slate-800/60 border-slate-700 hover:bg-slate-800 text-slate-200'
+          }">
+            <input type="radio" name="question-option" value="${oIdx}" ${selected ? 'checked' : ''} onchange="selectAnswer(${idx}, ${oIdx})" class="mt-1 text-red-600 focus:ring-red-600 h-4 w-4" />
+            <span class="text-sm font-medium leading-relaxed">${opt}</span>
+          </label>
+        `;
+      }).join('');
+
+      document.getElementById('btn-prev').style.display = idx === 0 ? 'none' : 'flex';
+      const isLast = idx === 24;
+      document.getElementById('btn-next').style.display = isLast ? 'none' : 'flex';
+      document.getElementById('btn-submit-quiz').style.display = isLast ? 'flex' : 'none';
+
+      renderQuestionNavGrid();
+    }
+
+    window.selectAnswer = function(qIdx, optIdx) {
+      quizState.userAnswers[qIdx] = optIdx;
+      renderQuestionNavGrid();
+    };
+
+    window.goToQuestion = function(idx) {
+      quizState.currentIndex = idx;
+      renderCurrentQuestion();
+    };
+
+    window.nextQuestion = function() {
+      if (quizState.currentIndex < 24) {
+        quizState.currentIndex++;
+        renderCurrentQuestion();
+      }
+    };
+
+    window.prevQuestion = function() {
+      if (quizState.currentIndex > 0) {
+        quizState.currentIndex--;
+        renderCurrentQuestion();
+      }
+    };
+
+    window.confirmSubmitQuiz = function() {
+      const unanswered = quizState.userAnswers.filter(a => a === null).length;
+      if (unanswered > 0) {
+        if (!confirm(`Tiene ${unanswered} pregunta(s) sin responder. ¿Desea entregar el examen de todos modos?`)) {
+          return;
+        }
+      }
+      submitQuiz();
+    };
+
+    function submitQuiz() {
+      if (quizState.timerInterval) clearInterval(quizState.timerInterval);
+
+      let correctCount = 0;
+      const details = quizState.questions.map((q, i) => {
+        const userAns = quizState.userAnswers[i];
+        const isCorrect = userAns === q.correctIndex;
+        if (isCorrect) correctCount++;
+        return {
+          ...q,
+          userAnswerIndex: userAns,
+          isCorrect
+        };
+      });
+
+      const score = correctCount * 0.80; // 25 preguntas x 0.80 = 20.00 pts máx
+      const percentage = Math.round((correctCount / 25) * 100);
+
+      const now = new Date();
+      const timestampISO = now.toISOString();
+      const formattedDate = now.toLocaleString('es-VE', { dateStyle: 'medium', timeStyle: 'medium' });
+
+      const record = {
+        participantName: quizState.participantName,
+        participantId: quizState.participantId,
+        participantCohort: quizState.participantCohort || 'General',
+        dateISO: timestampISO,
+        dateFormatted: formattedDate,
+        score,
+        correctCount,
+        totalQuestions: 25,
+        percentage,
+        durationSeconds: quizState.elapsedSeconds,
+        durationFormatted: formatDuration(quizState.elapsedSeconds),
+        attemptSummary: details.map((d, i) => ({
+          num: i + 1,
+          chapter: d.chapter,
+          question: d.question,
+          userText: d.userAnswerIndex !== null ? d.options[d.userAnswerIndex] : 'Sin responder',
+          correctText: d.options[d.correctIndex],
+          isCorrect: d.isCorrect
+        }))
+      };
+
+      quizState.lastResult = { ...record, details };
+      saveRecordLocally(record);
+
+      renderResultsView(quizState.lastResult);
+      switchView('results');
+      showToast(`Evaluación finalizada: ${formatScore(score)} / 20,00 puntos.`, 'success');
+    }
+
+    // ==================== RENDERIZADO DE RESULTADOS ====================
+    function renderResultsView(result) {
+      const passingThreshold = Number(document.getElementById('passing-threshold')?.value || 12);
+      const passed = result.score >= passingThreshold;
+
+      document.getElementById('res-name').textContent = result.participantName;
+      document.getElementById('res-id').textContent = result.participantId;
+      const cohortWrapper = document.getElementById('res-cohort-wrapper');
+      if (result.participantCohort && result.participantCohort !== 'General') {
+        document.getElementById('res-cohort').textContent = result.participantCohort;
+        cohortWrapper.classList.remove('hidden');
+      } else {
+        cohortWrapper.classList.add('hidden');
+      }
+      document.getElementById('res-date').textContent = result.dateFormatted;
+      document.getElementById('res-score').textContent = formatScore(result.score);
+      document.getElementById('res-correct').textContent = `${result.correctCount} / 25`;
+      document.getElementById('res-percent').textContent = `${result.percentage}%`;
+      document.getElementById('res-time').textContent = result.durationFormatted;
+
+      const badge = document.getElementById('res-status-badge');
+      badge.className = `px-4 py-2 rounded-xl font-extrabold text-sm uppercase tracking-wide self-start sm:self-center ${
+        passed ? 'bg-emerald-950 text-emerald-300 border border-emerald-700' : 'bg-red-950 text-red-300 border border-red-700'
+      }`;
+      badge.textContent = passed ? 'Aprobado' : 'Reprobado';
+
+      const detailsList = document.getElementById('results-details-list');
+      detailsList.innerHTML = result.details.map((d, idx) => {
+        const userText = d.userAnswerIndex !== null ? d.options[d.userAnswerIndex] : 'Sin responder';
+        const correctText = d.options[d.correctIndex];
+        return `
+          <div class="p-4 rounded-xl border ${d.isCorrect ? 'bg-emerald-950/30 border-emerald-800/80' : 'bg-red-950/30 border-red-800/80'} space-y-2">
+            <div class="flex items-center justify-between gap-2">
+              <span class="text-xs font-bold text-slate-300">Pregunta #${idx + 1} <span class="text-slate-400 font-normal">(${d.chapter})</span></span>
+              <span class="text-xs font-extrabold px-2.5 py-0.5 rounded ${d.isCorrect ? 'bg-emerald-900 text-emerald-200' : 'bg-red-900 text-red-200'}">
+                ${d.isCorrect ? 'Correcta (+0,80 pts)' : 'Incorrecta (0,00 pts)'}
+              </span>
+            </div>
+            <p class="font-bold text-white text-sm sm:text-base">${d.question}</p>
+            <div class="text-xs space-y-1">
+              <p class="${d.isCorrect ? 'text-emerald-300 font-semibold' : 'text-red-300'}">
+                <strong>Su respuesta:</strong> ${userText}
+              </p>
+              ${!d.isCorrect ? `<p class="text-emerald-300 font-semibold"><strong>Respuesta correcta:</strong> ${correctText}</p>` : ''}
+              <p class="text-slate-300 pt-1 border-t border-slate-800"><strong>Fundamento normativo:</strong> ${d.explanation}</p>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    // ==================== HISTORIAL Y EXPORTACIÓN CSV (DOCENTE) ====================
+    window.renderHistoryTable = function() {
+      if (!isTeacherAuthenticated) return;
+
+      const tbody = document.getElementById('history-tbody');
+      const searchQuery = document.getElementById('history-search').value.trim().toLowerCase();
+      const statusFilter = document.getElementById('history-filter-status').value;
+      const sortMode = document.getElementById('history-sort').value;
+      const passingThreshold = Number(document.getElementById('passing-threshold').value || 12);
+
+      document.getElementById('passing-grade-label').textContent = formatScore(passingThreshold);
+
+      let records = getAllRecords();
+
+      records = records.filter(r => {
+        const matchesSearch =
+          (r.participantName || '').toLowerCase().includes(searchQuery) ||
+          (r.participantId || '').toLowerCase().includes(searchQuery) ||
+          (r.participantCohort || '').toLowerCase().includes(searchQuery);
+
+        const isApproved = Number(r.score) >= passingThreshold;
+        const matchesStatus =
+          statusFilter === 'all' ||
+          (statusFilter === 'approved' && isApproved) ||
+          (statusFilter === 'failed' && !isApproved);
+
+        return matchesSearch && matchesStatus;
+      });
+
+      records.sort((a, b) => {
+        if (sortMode === 'date-desc') return (b.dateISO || '').localeCompare(a.dateISO || '');
+        if (sortMode === 'date-asc') return (a.dateISO || '').localeCompare(b.dateISO || '');
+        if (sortMode === 'score-desc') return Number(b.score) - Number(a.score);
+        if (sortMode === 'score-asc') return Number(a.score) - Number(b.score);
+        if (sortMode === 'name-asc') return (a.participantName || '').localeCompare(b.participantName || '');
+        return 0;
+      });
+
+      const total = records.length;
+      const approvedCount = records.filter(r => Number(r.score) >= passingThreshold).length;
+      const failedCount = total - approvedCount;
+      const scores = records.map(r => Number(r.score || 0));
+      const avgScore = total > 0 ? scores.reduce((acc, v) => acc + v, 0) / total : 0;
+      const maxScore = total > 0 ? Math.max(...scores) : 0;
+      const minScore = total > 0 ? Math.min(...scores) : 0;
+
+      document.getElementById('stat-total').textContent = total;
+      document.getElementById('stat-approved').textContent = approvedCount;
+      document.getElementById('stat-failed').textContent = failedCount;
+      document.getElementById('stat-avg').textContent = `${formatScore(avgScore)} pts`;
+      document.getElementById('stat-max').textContent = `${formatScore(maxScore)} pts`;
+      document.getElementById('stat-min').textContent = `${formatScore(minScore)} pts`;
+
+      if (records.length === 0) {
+        tbody.innerHTML = `
+          <tr>
+            <td colspan="9" class="py-10 text-center text-slate-400 text-sm">
+              No se encontraron registros de evaluaciones almacenados.
+            </td>
+          </tr>
+        `;
+        return;
+      }
+
+      tbody.innerHTML = records.map((r, index) => {
+        const passed = Number(r.score) >= passingThreshold;
+        const encodedKey = encodeURIComponent(`${r.participantId}_${r.dateISO}`);
+        return `
+          <tr class="hover:bg-slate-800/60 transition">
+            <td class="py-3 px-4 font-bold text-white">${r.participantName}</td>
+            <td class="py-3 px-4 font-mono text-xs sm:text-sm text-slate-300">${r.participantId}</td>
+            <td class="py-3 px-4 text-xs font-medium text-slate-300">${r.participantCohort || 'General'}</td>
+            <td class="py-3 px-4 text-xs text-slate-400">${r.dateFormatted}</td>
+            <td class="py-3 px-4 text-center font-semibold text-slate-200">${r.correctCount} / 25</td>
+            <td class="py-3 px-4 text-center font-extrabold text-white">${formatScore(r.score)}</td>
+            <td class="py-3 px-4 text-center font-mono text-xs text-slate-400">${r.durationFormatted || '—'}</td>
+            <td class="py-3 px-4 text-center">
+              <span class="inline-block px-2.5 py-1 rounded-full text-xs font-bold ${
+                passed ? 'bg-emerald-950 text-emerald-300 border border-emerald-800' : 'bg-red-950 text-red-300 border border-red-800'
+              }">
+                ${passed ? 'Aprobado' : 'Reprobado'}
+              </span>
+            </td>
+            <td class="py-3 px-4 text-center">
+              <div class="inline-flex items-center gap-1.5">
+                <button type="button" onclick="openAttemptDetailModal('${encodedKey}')" title="Ver respuestas del intento"
+                  class="px-2.5 py-1 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-semibold transition">
+                  Detalle
+                </button>
+                <button type="button" onclick="openDeleteSingleModal('${encodedKey}')" title="Eliminar este registro"
+                  class="p-1.5 rounded-lg bg-red-950 hover:bg-red-900 text-red-300 border border-red-800 transition">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                  </svg>
+                </button>
+              </div>
+            </td>
+          </tr>
+        `;
+      }).join('');
+    };
+
+    window.openAttemptDetailModal = function(encodedKey) {
+      if (!isTeacherAuthenticated) return;
+      const key = decodeURIComponent(encodedKey);
+      const record = getAllRecords().find(r => `${r.participantId}_${r.dateISO}` === key);
+      if (!record) return;
+
+      document.getElementById('modal-detail-title').textContent =
+        `${record.participantName} (${record.participantId}) — ${formatScore(record.score)} / 20,00 pts`;
+
+      const body = document.getElementById('modal-detail-body');
+      if (!record.attemptSummary || record.attemptSummary.length === 0) {
+        body.innerHTML = `<p class="text-slate-400 text-center py-6">Este registro no contiene desglose pregunta por pregunta.</p>`;
+      } else {
+        body.innerHTML = record.attemptSummary.map(item => `
+          <div class="p-3 rounded-xl border ${item.isCorrect ? 'bg-emerald-950/40 border-emerald-800' : 'bg-red-950/40 border-red-800'} space-y-1">
+            <div class="flex items-center justify-between gap-2">
+              <span class="font-bold text-white">Pregunta #${item.num} <span class="text-xs font-normal text-slate-400">(${item.chapter})</span></span>
+              <span class="text-[11px] font-extrabold px-2 py-0.5 rounded ${item.isCorrect ? 'bg-emerald-900 text-emerald-200' : 'bg-red-900 text-red-200'}">
+                ${item.isCorrect ? '+0,80 pts' : '0,00 pts'}
+              </span>
+            </div>
+            <p class="font-semibold text-slate-200">${item.question}</p>
+            <p class="text-xs text-slate-300"><strong>Respuesta marcada:</strong> ${item.userText}</p>
+            ${!item.isCorrect ? `<p class="text-xs text-emerald-300"><strong>Correcta:</strong> ${item.correctText}</p>` : ''}
+          </div>
+        `).join('');
+      }
+
+      document.getElementById('attempt-detail-modal').classList.remove('hidden');
+    };
+
+    window.closeAttemptDetailModal = function() {
+      document.getElementById('attempt-detail-modal').classList.add('hidden');
+    };
+
+    window.openDeleteSingleModal = function(encodedKey) {
+      if (!isTeacherAuthenticated) return;
+      const key = decodeURIComponent(encodedKey);
+      const record = getAllRecords().find(r => `${r.participantId}_${r.dateISO}` === key);
+      if (!record) return;
+
+      pendingDeleteRecord = record;
+      document.getElementById('delete-single-text').innerHTML =
+        `¿Confirma que desea eliminar permanentemente el intento de <strong>${record.participantName}</strong> (C.I. <strong>${record.participantId}</strong>, Nota: <strong>${formatScore(record.score)} pts</strong>)?`;
+      document.getElementById('delete-single-modal').classList.remove('hidden');
+    };
+
+    window.closeDeleteSingleModal = function() {
+      pendingDeleteRecord = null;
+      document.getElementById('delete-single-modal').classList.add('hidden');
+    };
+
+    window.confirmDeleteSingleRecord = function() {
+      if (!isTeacherAuthenticated || !pendingDeleteRecord) return;
+      const target = pendingDeleteRecord;
+      closeDeleteSingleModal();
+
+      try {
+        const records = getAllRecords();
+        const filtered = records.filter(
+          item => !(item.participantId === target.participantId && item.dateISO === target.dateISO)
+        );
+        localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(filtered));
+      } catch (e) {}
+
+      renderHistoryTable();
+      showToast('Registro eliminado correctamente.', 'success');
+    };
+
+    window.openClearAllModal = function() {
+      if (!isTeacherAuthenticated) return;
+      document.getElementById('clear-confirm-word').value = '';
+      document.getElementById('clear-confirm-error').classList.add('hidden');
+      document.getElementById('clear-all-modal').classList.remove('hidden');
+      setTimeout(() => document.getElementById('clear-confirm-word')?.focus(), 80);
+    };
+
+    window.closeClearAllModal = function() {
+      document.getElementById('clear-all-modal').classList.add('hidden');
+    };
+
+    window.executeClearAllRecords = function() {
+      if (!isTeacherAuthenticated) return;
+      const wordInput = document.getElementById('clear-confirm-word');
+      const errEl = document.getElementById('clear-confirm-error');
+
+      if ((wordInput.value || '').trim().toUpperCase() !== 'LIMPIAR') {
+        errEl.classList.remove('hidden');
+        wordInput.focus();
+        return;
+      }
+
+      errEl.classList.add('hidden');
+      try {
+        localStorage.removeItem(LOCAL_STORAGE_KEY);
+      } catch (e) {}
+
+      closeClearAllModal();
+      renderHistoryTable();
+      showToast('Todo el registro ha sido limpiado. El sistema está listo para una nueva cohorte.', 'success');
+    };
+
+    window.exportHistoryToCSV = function() {
+      if (!isTeacherAuthenticated) {
+        showToast('Acceso denegado. Inicie sesión como docente.', 'error');
+        return;
+      }
+      const passingThreshold = Number(document.getElementById('passing-threshold').value || 12);
+      const records = getAllRecords();
+
+      if (records.length === 0) {
+        showToast('No hay registros disponibles para exportar.', 'warning');
+        return;
+      }
+
+      const headers = [
+        'Nombre Completo',
+        'Cedula de Identidad',
+        'Seccion / Cohorte',
+        'Fecha y Hora',
+        'Aciertos (sobre 25)',
+        'Calificacion (sobre 20)',
+        'Porcentaje (%)',
+        'Tiempo Empleado',
+        `Estado (Minima ${formatScore(passingThreshold)} pts)`
+      ];
+
+      const rows = records.map(r => {
+        const passed = Number(r.score) >= passingThreshold ? 'APROBADO' : 'REPROBADO';
+        return [
+          `"${(r.participantName || '').replace(/"/g, '""')}"`,
+          `"${(r.participantId || '').replace(/"/g, '""')}"`,
+          `"${(r.participantCohort || 'General').replace(/"/g, '""')}"`,
+          `"${r.dateFormatted || ''}"`,
+          r.correctCount,
+          `"${formatScore(r.score)}"`,
+          `${r.percentage}%`,
+          `"${r.durationFormatted || ''}"`,
+          `"${passed}"`
+        ].join(';');
+      });
+
+      const csvContent = '\uFEFF' + [headers.join(';'), ...rows].join('\n');
+      const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = `Acta_Calificaciones_COVENIN_3507_1999_${new Date().toISOString().slice(0, 10)}.csv`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+
+      showToast('Acta de calificaciones exportada en CSV compatible con Excel.', 'success');
+    };
+  </script>
+</body>
+</html>
